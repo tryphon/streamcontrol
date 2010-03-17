@@ -1,0 +1,27 @@
+<%= title_tag Stream.human_name %>
+
+<div class="description">
+  <p>
+    <%= Stream.human_attribute_name("server") %> :
+    <%= @stream.server %>
+  </p>
+
+  <p>
+    <%= Stream.human_attribute_name("port") %> :
+    <%= @stream.port %>
+  </p>
+
+  <p>
+    <%= Stream.human_attribute_name("mount_point") %> :
+    <%= @stream.mount_point %>
+  </p>
+
+  <p>
+    <%= Stream.human_attribute_name("password") %> :
+    <%= @stream.password %>
+  </p>
+</div>
+
+<div class="actions">
+  <%= link_to t("actions.edit"), edit_stream_path, :class => "edit" %>
+</div>
