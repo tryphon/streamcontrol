@@ -1,4 +1,5 @@
 class Stream < ActiveForm::Base
+  include PuppetConfigurable
 
   attr_accessor :server, :port, :password, :mount_point
 
@@ -6,14 +7,6 @@ class Stream < ActiveForm::Base
 
   def new_record?
     false
-  end
-
-  def self.load
-    Stream.new
-  end
-
-  def save
-    true
   end
 
 end
