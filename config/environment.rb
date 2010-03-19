@@ -20,6 +20,9 @@ Rails::Initializer.run do |config|
   end
 
   config.after_initialize do
+    Dir["#{Rails.root}/config/locales/**/*.yml"].each do |locale_file|
+      I18n.load_path << locale_file
+    end
     Dir["#{Rails.root}/vendor/plugins/*/config/locales/**/*.yml"].each do |locale_file|
       I18n.load_path << locale_file
     end

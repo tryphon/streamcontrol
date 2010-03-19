@@ -1,0 +1,15 @@
+fr:
+  activerecord:
+    attributes:
+      stream:
+        server: Serveur
+        mount_point: Point de montage
+        password: Mot de passe
+    models:
+      stream: Flux
+  streams:
+    edit:
+      title: Modifier le flux
+      submit: Modifier
+      cancel: revenir
+    
