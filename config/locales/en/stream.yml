@@ -1,0 +1,7 @@
+en:
+  streams:
+    edit:
+      title: Edit the stream
+      submit: Edit
+      cancel: back
+    
