@@ -17,4 +17,10 @@ describe Stream do
     @stream.should have(1).error_on(:server)
   end
 
+  it "should strip attributes before validation" do
+    @stream.password = " dummy "
+    @stream.valid?
+    @stream.password.should == "dummy"
+  end
+
 end
