@@ -1,0 +1,3 @@
+var/log/streamcontrol usr/share/streamcontrol/log
+etc/streamcontrol/database.yml usr/share/streamcontrol/config/database.yml
+etc/streamcontrol/production.rb usr/share/streamcontrol/config/environments/production.rb
