@@ -8,8 +8,15 @@ fr:
     models:
       stream: Flux
   streams:
+    index:
+      title: Flux gérés
+      actions:
+        create: Ajouter un flux supplémentaire
+    new:
+      title: Ajouter un flux
+      submit: Ajouter
+      cancel: revenir    
     edit:
       title: Modifier le flux
       submit: Modifier
-      cancel: revenir
-    
+      cancel: revenir    

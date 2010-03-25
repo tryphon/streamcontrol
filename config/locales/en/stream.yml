@@ -1,7 +1,15 @@
 en:
   streams:
+    index:
+      title: Streams
+      actions:
+        create: Add a new stream
+    new:
+      title: Add a stream
+      submit: Add
+      cancel: cancel    
     edit:
-      title: Edit the stream
-      submit: Edit
-      cancel: back
+      title: Edit a stream
+      submit: Modify
+      cancel: cancel
     

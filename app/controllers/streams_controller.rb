@@ -1,23 +1,17 @@
 # -*- coding: undecided -*-
-class StreamsController < ApplicationController
+class StreamsController < InheritedResources::Base
 
-  def show
-    @stream = Stream.load
+  actions :all
+  respond_to :html, :xml, :json
+
+  protected
+
+  def collection
+    @streams ||= Stream.all
   end
 
-  def edit
-    @stream = Stream.load
-  end
-
-  def update
-    @stream = Stream.new(params[:stream])
-    if @stream.save
-      flash[:success] = "La configuration a été modifiée avec succès"
-      redirect_to stream_path
-    else
-      flash[:failure] = "La configuration n'a pu été modifiée"
-      render :action => "edit"
-    end
+  def resource
+    @stream ||= Stream.find(params[:id])
   end
 
 end

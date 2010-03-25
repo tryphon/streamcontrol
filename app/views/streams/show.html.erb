@@ -1,4 +1,4 @@
-<%= title_tag Stream.human_name %>
+<%= title_tag "#{Stream.human_name} #{@stream.name}" %>
 
 <div class="description">
   <p>
@@ -23,5 +23,6 @@
 </div>
 
 <div class="actions">
-  <%= link_to t("actions.edit"), edit_stream_path, :class => "edit" %>
+  <%= link_to t("actions.edit"), edit_stream_path(@stream), :class => "edit" %>
+  <%= link_to t("actions.destroy"), @stream, :confirm => t("destroy.confirm"), :method => :delete, :class => "destroy" %>
 </div>
