@@ -4,6 +4,12 @@ en:
       title: Streams
       actions:
         create: Add a new stream
+    show:
+      server_attributes: Server parameters
+      format_attributes: Audio format 
+    form:
+      server_attributes: Server parameters
+      format_attributes: Audio format 
     new:
       title: Add a stream
       submit: Add

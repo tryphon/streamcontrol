@@ -3,30 +3,7 @@
 <% form_for @stream do |f| %>
   <%= f.error_messages %>
 
-  <p>
-    <%= f.label :name, Stream.human_attribute_name("name") %><br/>
-    <%= f.text_field :name %>
-  </p>
-
-  <p>
-    <%= f.label :server, Stream.human_attribute_name("server") %><br/>
-    <%= f.text_field :server %>
-  </p>
-  
-  <p>
-    <%= f.label :port, Stream.human_attribute_name("port") %><br/>
-    <%= f.text_field :port %>
-  </p>
-
-  <p>
-    <%= f.label :mount_point, Stream.human_attribute_name("mount_point") %><br/>
-    <%= f.text_field :mount_point %>
-  </p>
-
-  <p>
-    <%= f.label :password, Stream.human_attribute_name("password") %><br/>
-    <%= f.text_field :password %>
-  </p>
+  <%= render :partial => f %>
 
   <p>
     <%= f.submit t(".submit") %> 

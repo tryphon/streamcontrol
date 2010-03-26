@@ -1,6 +1,7 @@
 <%= title_tag "#{Stream.human_name} #{@stream.name}" %>
 
 <div class="description">
+  <h3><%= t(".server_attributes") %></h3>
   <p>
     <%= Stream.human_attribute_name("server") %> :
     <%= @stream.server %>
@@ -19,6 +20,13 @@
   <p>
     <%= Stream.human_attribute_name("password") %> :
     <%= @stream.password %>
+  </p>
+
+  <h3><%= t(".format_attributes") %></h3>
+
+  <p>
+    <%= Stream.human_attribute_name("format") %> :
+    <%= @stream.format %>
   </p>
 </div>
 

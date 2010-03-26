@@ -5,10 +5,16 @@ class Stream < ActiveForm::Base
   strip_attributes!
 
   attr_accessor :name, :id
+  validates_presence_of :name
+
   attr_accessor :server, :password, :mount_point
   acts_as_ip_port :port
+  validates_presence_of :server, :port, :mount_point, :password
 
-  validates_presence_of :name, :server, :port, :mount_point, :password
+  attr_accessor :format
+  validates_presence_of :format
+  validates_inclusion_of :format, :in => [ :ogg_vorbis, :mp3, :aac ]
+
   validates_host :server
 
   def url
@@ -17,6 +23,10 @@ class Stream < ActiveForm::Base
 
   def path
     mount_point.start_with?('/') ? mount_point : "/#{mount_point}"
+  end
+
+  def format=(format)
+    @format = format ? format.to_sym : nil
   end
 
   def new_record?

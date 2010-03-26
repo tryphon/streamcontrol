@@ -13,6 +13,8 @@ describe Stream do
     PuppetConfiguration.destroy
   end
 
+  it { should validate_presence_of :name }
+
   it { should validate_presence_of :server }
   it { should validate_presence_of :port }
   it { should validate_presence_of :mount_point }
@@ -28,6 +30,17 @@ describe Stream do
     @stream.password = " dummy "
     @stream.valid?
     @stream.password.should == "dummy"
+  end
+
+  describe "format" do
+
+    it { should validate_presence_of :format }
+    
+    it "should support :ogg_vorbis, :mp3 and :aac" do
+      @stream.should allow_values_for :format, :ogg_vorbis, :mp3, :aac
+      @stream.should_not allow_values_for :dummy
+    end
+
   end
 
   describe "save" do

@@ -1,0 +1,34 @@
+<p>
+  <%= form.label :name, Stream.human_attribute_name("name") %><br/>
+  <%= form.text_field :name %>
+</p>
+
+<h3><%= t(".server_attributes") %></h3>
+
+<p>
+  <%= form.label :server, Stream.human_attribute_name("server") %><br/>
+  <%= form.text_field :server %>
+</p>
+
+<p>
+  <%= form.label :port, Stream.human_attribute_name("port") %><br/>
+  <%= form.text_field :port %>
+</p>
+
+<p>
+  <%= form.label :mount_point, Stream.human_attribute_name("mount_point") %><br/>
+  <%= form.text_field :mount_point %>
+</p>
+
+<p>
+  <%= form.label :password, Stream.human_attribute_name("password") %><br/>
+  <%= form.text_field :password %>
+</p>
+
+<h3><%= t(".format_attributes") %></h3>
+
+<p>
+  <%= form.label :format, Stream.human_attribute_name("format") %><br/>
+  <%= format_radio_buttons form %>
+</p>
+

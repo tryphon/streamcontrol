@@ -12,6 +12,12 @@ fr:
       title: Flux gérés
       actions:
         create: Ajouter un flux supplémentaire
+    show:
+      server_attributes: Accès au serveur
+      format_attributes: Compression audio
+    form:
+      server_attributes: Accès au serveur
+      format_attributes: Compression audio
     new:
       title: Ajouter un flux
       submit: Ajouter
