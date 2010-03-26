@@ -38,23 +38,23 @@ class Stream < ActiveForm::Base
   alias_method_chain :update_attributes, :save
 
   def save(dont_valid = false)
-    logger.debug "save"
     return false if respond_to?(:valid?) and not valid? and not dont_valid
 
     self.id ||= (Stream.all.collect(&:id).max or 0) + 1
     PuppetConfiguration.load.update_attributes(self.attributes, "stream_#{self.id}").save
-    logger.debug PuppetConfiguration.load.inspect
   end
 
   def destroy
     unless new_record?
       streams = Stream.all
-      PuppetConfiguration.load.clear("stream_").save
-      streams.delete self
+      PuppetConfiguration.transaction do
+        PuppetConfiguration.load.clear("stream_")
+        streams.delete self
 
-      streams.each_with_index do |stream, index|
-        stream.id = index + 1
-        stream.save(true)
+        streams.each_with_index do |stream, index|
+          stream.id = index + 1
+          stream.save(true)
+        end
       end
     end
   end
