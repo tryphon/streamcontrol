@@ -1,4 +1,3 @@
-
 <%= title_tag t(".title") %>
 
 <% for stream in @streams %>
@@ -23,6 +22,8 @@
   </p>
 </div>
 
-<div class="actions">
-  <%= link_to t(".actions.create"), new_stream_path, :class => "create" %>
-</div>
+<% if Stream.can_create? %>
+  <div class="actions">
+    <%= link_to t(".actions.create"), new_stream_path, :class => "create" %>
+  </div>
+<% end %>

@@ -23,6 +23,28 @@ class Stream < ActiveForm::Base
 
   def after_initialize
     self.format ||= :ogg_vorbis
+    self.quality ||= 4
+    if new_record?
+      self.server ||= Stream.default_server
+      self.port ||= Stream.default_port
+    end
+  end
+
+  def self.stream_by_default(&block)
+    stream = Stream.all.last
+    if stream and block_given?
+      yield stream
+    else
+      stream
+    end
+  end
+
+  def self.default_server
+    stream_by_default(&:server)
+  end
+
+  def self.default_port
+    stream_by_default(&:port) or 8000
   end
 
   def url
@@ -39,6 +61,13 @@ class Stream < ActiveForm::Base
 
   def quality=(quality)
     @quality = quality ? quality.to_i : nil
+  end
+
+  @@maximum_count = 4
+  cattr_accessor :maximum_count
+
+  def self.can_create?
+    count < maximum_count
   end
 
   def new_record?
@@ -93,6 +122,10 @@ class Stream < ActiveForm::Base
         Stream.new attributes.update(:id => n) 
       end
     end.compact
+  end
+
+  def self.count
+    all.size
   end
 
   def self.find(id)

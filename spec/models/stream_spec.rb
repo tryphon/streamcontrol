@@ -41,6 +41,11 @@ describe Stream do
       @stream.should_not allow_values_for :dummy
     end
 
+    it "should transforme the given format into a symbol" do
+      @stream.format = "ogg_vorbis"
+      @stream.format.should == :ogg_vorbis
+    end
+
   end
 
   describe "quality" do
@@ -52,6 +57,99 @@ describe Stream do
       @stream.should_not allow_values_for :quality, -1, 11
     end
 
+    it "should transforme the given quality into an integer" do
+      @stream.quality = "5"
+      @stream.quality.should == 5
+    end
+
+  end
+
+  describe "can_create?" do
+    
+    it "should be true when Stream count less than Stream.maximum_count" do
+      Stream.stub!(:maximum_count).and_return(4)
+      Stream.stub!(:count).and_return(3)
+      Stream.can_create?.should be_true
+    end
+
+    it "should be false when Stream count equals Stream.maximum_count" do
+      Stream.stub!(:maximum_count).and_return(3)
+      Stream.stub!(:count).and_return(3)
+      Stream.can_create?.should be_false
+    end
+
+  end
+
+  describe "url" do
+    
+    it "should create a pseudo url with server, port and path" do
+      @stream.stub!(:server).and_return("server")
+      @stream.stub!(:port).and_return("port")
+      @stream.stub!(:mount_point).and_return("mount_point")
+
+      @stream.url.should == "server:port/mount_point"
+    end
+
+  end
+
+  describe "path" do
+    
+    it "should return /mount_point if it doesn't include a starting /" do
+      @stream.mount_point = "mount_point"
+      @stream.path.should == "/mount_point"
+    end
+
+    it "should return mount_point if it includes a starting /" do
+      @stream.mount_point = "/mount_point"
+      @stream.path.should == "/mount_point"
+    end
+
+  end
+
+  describe "default_port" do
+    
+    it "should be 8000 if no other stream exists" do
+      Stream.stub!(:all).and_return([])
+      Stream.default_port.should == 8000
+    end
+
+    it "should use the last stream port" do
+      Stream.stub!(:all).and_return([mock(Stream), mock(Stream, :port => 80)])
+      Stream.default_port.should == 80
+    end
+
+  end
+
+  describe "default_server" do
+    
+    it "should be nil if no other stream exists" do
+      Stream.stub!(:all).and_return([])
+      Stream.default_server.should be_nil
+    end
+
+    it "should use the last stream server" do
+      Stream.stub!(:all).and_return([mock(Stream), mock(Stream, :server => "dummy")])
+      Stream.default_server.should == "dummy"
+    end
+
+  end
+
+  describe "to_param" do
+    
+    it "should return stream id as string" do
+      @stream.id = 1
+      @stream.to_param.should == "1"
+    end
+    
+  end
+
+  describe "presenter" do
+
+    it "should return a StreamPresenter" do
+      StreamPresenter.should_receive(:new).with(@stream).and_return(presenter = mock(StreamPresenter))
+      @stream.presenter.should == presenter
+    end
+    
   end
 
   describe "save" do
@@ -92,6 +190,15 @@ describe Stream do
       
     end
     
+  end
+
+  describe "update_attributes" do
+    
+    it "should save Stream" do
+      @stream.should_receive(:save)
+      @stream.update_attributes :name => "test"
+    end
+
   end
 
   describe "destroy" do
@@ -157,6 +264,15 @@ describe Stream do
         Stream.find(1).should be_nil
       end
       
+    end
+
+    describe "count" do
+      
+      it "should return the size of Stream.all" do
+        Stream.stub!(:all).and_return([1,2])
+        Stream.count.should == 2
+      end
+
     end
 
   end
