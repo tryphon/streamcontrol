@@ -52,7 +52,7 @@ class Stream < ActiveForm::Base
   end
 
   def path
-    mount_point.start_with?('/') ? mount_point : "/#{mount_point}"
+    mount_point and mount_point.start_with?('/') ? mount_point : "/#{mount_point}"
   end
 
   def format=(format)

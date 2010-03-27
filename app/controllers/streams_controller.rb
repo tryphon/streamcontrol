@@ -10,8 +10,4 @@ class StreamsController < InheritedResources::Base
     @streams ||= Stream.all
   end
 
-  def resource
-    @stream ||= Stream.find(params[:id])
-  end
-
 end

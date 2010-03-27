@@ -1,0 +1,27 @@
+require 'spec_helper'
+
+describe "/streams/_form" do
+
+  before(:each) do
+    assigns[:stream] = @stream = Stream.new(:id => 1)
+
+    @form_builder = mock(ActionView::Helpers::FormBuilder, :text_field => '<input type="text"/>', :label => '<label/>', :collection_select => "<select/>")
+
+    template.stub!(:format_radio_buttons)
+  end
+
+  def render_view
+    render :partial => "/streams/form", :locals => { :form => @form_builder }
+  end
+
+  it "should the helper format_radio_buttons" do
+    template.should_receive(:format_radio_buttons).with(@form_builder)
+    render_view
+  end
+
+  it "should display a select to choose a quality between 0 and 10" do
+    @form_builder.should_receive(:collection_select).with(:quality, 0..10, :to_i, :to_s)
+    render_view
+  end
+
+end

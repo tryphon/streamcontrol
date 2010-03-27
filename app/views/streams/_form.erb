@@ -34,6 +34,6 @@
 
 <p>
   <%= form.label :quality, Stream.human_attribute_name("quality") %><br/>
-  <%= form.collection_select :quality, (0..10), :to_i, :to_s %>
+  <%= form.collection_select :quality, 0..10, :to_i, :to_s %>
 </p>
 
