@@ -15,7 +15,15 @@ class Stream < ActiveForm::Base
   validates_presence_of :format
   validates_inclusion_of :format, :in => [ :ogg_vorbis, :mp3, :aac ]
 
+  attr_accessor :quality
+  validates_presence_of :quality
+  validates_numericality_of :quality, :only_integer => true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 10
+
   validates_host :server
+
+  def after_initialize
+    self.format ||= :ogg_vorbis
+  end
 
   def url
     "#{server}:#{port}#{path}"
@@ -29,6 +37,10 @@ class Stream < ActiveForm::Base
     @format = format ? format.to_sym : nil
   end
 
+  def quality=(quality)
+    @quality = quality ? quality.to_i : nil
+  end
+
   def new_record?
     self.id.nil?
   end
@@ -39,6 +51,10 @@ class Stream < ActiveForm::Base
 
   def ==(other)
     other and self.id == other.id
+  end
+
+  def presenter
+    @presenter ||= StreamPresenter.new self
   end
 
   def update_attributes_with_save(attributes)

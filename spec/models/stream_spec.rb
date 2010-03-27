@@ -43,6 +43,17 @@ describe Stream do
 
   end
 
+  describe "quality" do
+
+    it { should validate_presence_of :quality }
+
+    it "should accept quality between 0 and 10" do
+      @stream.should allow_values_for :quality, *(0..10).to_a
+      @stream.should_not allow_values_for :quality, -1, 11
+    end
+
+  end
+
   describe "save" do
     
     it "should assign an identifier to new record" do

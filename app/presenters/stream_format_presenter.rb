@@ -17,6 +17,10 @@ class StreamFormatPresenter
     "http://#{I18n.locale}.wikipedia.org/wiki/#{wikipedia_page}"
   end
 
+  def self.find(format)
+    all.find { |p| p.format == format }
+  end
+
   def self.all
     @@instances
   end

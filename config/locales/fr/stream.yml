@@ -2,9 +2,11 @@ fr:
   activerecord:
     attributes:
       stream:
+        name: Nom
         server: Serveur
         mount_point: Point de montage
         password: Mot de passe
+        quality: Qualité
     models:
       stream: Flux
   streams:
