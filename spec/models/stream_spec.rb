@@ -36,14 +36,14 @@ describe Stream do
 
     it { should validate_presence_of :format }
     
-    it "should support :ogg_vorbis, :mp3 and :aac" do
-      @stream.should allow_values_for :format, :ogg_vorbis, :mp3, :aac
+    it "should support :vorbis, :mp3 and :aac" do
+      @stream.should allow_values_for :format, :vorbis, :mp3, :aac
       @stream.should_not allow_values_for :dummy
     end
 
     it "should transforme the given format into a symbol" do
-      @stream.format = "ogg_vorbis"
-      @stream.format.should == :ogg_vorbis
+      @stream.format = "vorbis"
+      @stream.format.should == :vorbis
     end
 
   end

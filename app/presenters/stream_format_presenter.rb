@@ -8,7 +8,7 @@ class StreamFormatPresenter
 
   @@instances = 
     [ 
-     StreamFormatPresenter.new(:ogg_vorbis, "Ogg/Vorbis", "Vorbis"),
+     StreamFormatPresenter.new(:vorbis, "Ogg/Vorbis", "Vorbis"),
      StreamFormatPresenter.new(:mp3, "MP3", "MP3"),
      StreamFormatPresenter.new(:aac, "AAC", "Advanced_Audio_Coding"),                 
     ]

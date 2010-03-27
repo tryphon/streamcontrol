@@ -13,7 +13,7 @@ class Stream < ActiveForm::Base
 
   attr_accessor :format
   validates_presence_of :format
-  validates_inclusion_of :format, :in => [ :ogg_vorbis, :mp3, :aac ]
+  validates_inclusion_of :format, :in => [ :vorbis, :mp3, :aac ]
 
   attr_accessor :quality
   validates_presence_of :quality
@@ -22,7 +22,7 @@ class Stream < ActiveForm::Base
   validates_host :server
 
   def after_initialize
-    self.format ||= :ogg_vorbis
+    self.format ||= :vorbis
     self.quality ||= 4
     if new_record?
       self.server ||= Stream.default_server
