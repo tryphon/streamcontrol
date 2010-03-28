@@ -1,3 +1,9 @@
+streamcontrol (0.2-1) UNRELEASED; urgency=low
+
+  * New upstream release
+
+ -- Alban Peignier <alban@tryphon.eu>  Sat, 27 Mar 2010 19:59:35 +0100
+
 streamcontrol (0.1-1) UNRELEASED; urgency=low
 
   * Initial release.
