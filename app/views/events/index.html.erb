@@ -1,0 +1,16 @@
+<%= title_tag t(".title") %>
+
+<table class="events">
+  <% for event in @events %>
+
+  <tr>
+    <td><%= event.presenter.severity_image_tag %></td>
+    <td><%= event.presenter.localized_created_at %></td>
+    <td><%= event.presenter.user_message %></td>
+    <td><%= event.presenter.stream_link(self) %></td>
+  </tr>
+
+  <% end %>
+</table>
+
+<%= will_paginate %>
