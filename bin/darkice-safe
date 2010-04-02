@@ -3,5 +3,5 @@
 #  Created on 2010-3-29.
 #  Copyright (c) 2010. All rights reserved.
 
-require File.expand_path(File.dirname(File.expand_path(File.readlink(__FILE__),File.dirname(__FILE__))) + "/../config/environment")
+require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 Darkice::CLI.execute(STDOUT, ARGV)
