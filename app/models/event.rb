@@ -42,7 +42,7 @@ class Event < ActiveRecord::Base
   end
 
   def stream
-    @stream ||= Stream.find_by_id(stream_id) unless stream_id.blank?
+    @stream ||= Stream.find(stream_id) unless stream_id.blank?
   end
 
   def destroy_obsolete_events

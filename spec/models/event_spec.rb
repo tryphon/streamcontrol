@@ -20,7 +20,7 @@ describe Event do
     
     it "should return the Stream identified by stream_id" do
       @event.stream_id = 1
-      Stream.should_receive(:find_by_id).with(1).and_return(stream = mock(Stream))
+      Stream.should_receive(:find).with(1).and_return(stream = mock(Stream))
       @event.stream.should == stream
     end
 
@@ -30,7 +30,7 @@ describe Event do
     end
 
     it "should return nil if no Stream is identified by stream_id" do
-      Stream.stub!(:find_by_id)
+      Stream.stub!(:find)
       @event.stream.should be_nil
     end
 
