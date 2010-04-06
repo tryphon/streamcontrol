@@ -32,7 +32,18 @@ module Darkice
         end
       end
 
-      stdout.puts Darkice::Process.new(options).loop
+      process = Darkice::Process.new(options)
+
+      trap("TERM") do 
+        process.kill
+        exit 0
+      end
+
+      trap("CLD") do
+        process.check
+      end
+
+      process.loop
     end
   end
 end
