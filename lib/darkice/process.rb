@@ -5,7 +5,7 @@ module Darkice
     
     attr_accessor :config_file, :executable, :status, :last_error, :debug, :darkice_pid
 
-    def initialize(options)
+    def initialize(options = {})
       options = {
         :config_file => "/etc/darkice.cfg",
         :executable => "/usr/bin/darkice",
@@ -15,6 +15,8 @@ module Darkice
       @config_file = options[:config_file]
       @executable = options[:executable] 
       @debug = options[:debug] 
+      @logger = options[:logger] 
+
       @stream_statuses = {}
 
       @status = :stopped
@@ -30,7 +32,7 @@ module Darkice
     attr_writer :logger
 
     def status=(status)
-      return self.status == status
+      return if self.status == status
 
       logger.debug "status changed: #{status}"
       if status == :running
@@ -49,8 +51,8 @@ module Darkice
     end
 
     def last_error=(error)
-      return if self.last_error == error
       logger.debug "error detected: #{error}"
+      return if self.last_error == error
       create_event :error, error
       @last_error = error
     end
@@ -156,9 +158,10 @@ module Darkice
         /DarkIce: DarkIce.cpp:\d: unsupported stream format:$/,
         /DarkIce: ConfigSection.cpp:\d+: format missing in section icecast-0/,
         /DarkIce: LameLibEncoder.h:\d+: unsupported number of input channels for the encoder/,
-        /DarkIce: VorbisLibEncoder.cpp:\d+: unsupported number of channels for the encoder/
+        /DarkIce: VorbisLibEncoder.cpp:\d+: unsupported number of channels for the encoder/,
+        /0 bytes transfered to the encoders/
         self.last_error = :invalid_config
-      when /DarkIce: VorbisLibEncoder.cpp:\d+: vorbis lib opening underlying sink error$/
+      when /DarkIce: VorbisLibEncoder.cpp:\d+: vorbis lib opening underlying sink error/
         self.last_error = :invalid_stream_vorbis
       when /DarkIce: LameLibEncoder.cpp:\d+: lame lib opening underlying sink error/
         self.last_error = :invalid_stream_mp3
