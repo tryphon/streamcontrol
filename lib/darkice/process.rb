@@ -52,9 +52,13 @@ module Darkice
 
     def last_error=(error)
       logger.debug "error detected: #{error}"
-      return if self.last_error == error
-      create_event :error, error
-      @last_error = error
+      unless same_error_than_previously? error
+        @last_error_event = create_event :error, error
+      end
+    end
+
+    def same_error_than_previously?(error)
+      @last_error_event and @last_error_event.message == error and @last_error_event.created_at > 25.seconds.ago
     end
 
     def debug?
