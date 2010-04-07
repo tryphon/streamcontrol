@@ -13,3 +13,4 @@ fr:
       stream_reconnecting: "Reconnection du flux"
       source_started: "Source démarrée"
       source_stopped: "Source stoppée"
+      audio_problem: "Erreur sur le périphérique audio"

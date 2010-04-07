@@ -155,7 +155,7 @@ module Darkice
       when /BufferedSink, new peak: /
         self.status = :running if self.status == :stopped
       when /DarkIce: DarkIce.cpp:\d+: no section \[general\] in config/,
-        /DarkIce: DarkIce.cpp:\d: unsupported stream format:$/,
+        /DarkIce: DarkIce.cpp:\d+: unsupported stream format/,
         /DarkIce: ConfigSection.cpp:\d+: format missing in section icecast-0/,
         /DarkIce: LameLibEncoder.h:\d+: unsupported number of input channels for the encoder/,
         /DarkIce: VorbisLibEncoder.cpp:\d+: unsupported number of channels for the encoder/,
@@ -175,6 +175,8 @@ module Darkice
         self.last_error = :upload_problem if $1.to_i < 1000
       when /MultiThreadedConnector :: sinkThread reconnecting[ ]+([\dx]+)/
         change_stream_status($1.to_i, :reconnecting)
+      when /DarkIce: OssDspSource.cpp:\d+: read error/
+        self.last_error = :audio_problem
       end
     end
 
