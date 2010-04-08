@@ -1,3 +1,10 @@
+streamcontrol (0.3-1) UNRELEASED; urgency=low
+
+  * New upstream release
+  * Create a link for /usr/bin/darkice-safe
+
+ -- Alban Peignier <alban@tryphon.eu>  Fri, 02 Apr 2010 18:53:47 +0200
+
 streamcontrol (0.2-1) UNRELEASED; urgency=low
 
   * New upstream release

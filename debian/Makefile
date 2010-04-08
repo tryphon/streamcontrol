@@ -12,10 +12,11 @@ build:
 	rm -f config/database.yml
 
 install:
-	cp -a app public vendor config lib db ${DESTDIR}usr/share/streamcontrol
+	cp -a app bin public vendor config lib db ${DESTDIR}usr/share/streamcontrol
 	rm -f ${DESTDIR}usr/share/streamcontrol/config/environments/production.rb
 	cp debian/database.yml debian/production.rb debian/apache2.conf ${DESTDIR}etc/streamcontrol/
 	cp debian/syslog_logger.rb ${DESTDIR}usr/share/streamcontrol/lib
+	cp debian/darkice-safe ${DESTDIR}usr/bin/
 
 clean:
 	rm -rf vendor/rails vendor/gems db/production.sqlite3

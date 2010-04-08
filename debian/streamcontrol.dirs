@@ -2,3 +2,4 @@ etc/streamcontrol
 usr/share/streamcontrol
 var/lib/streamcontrol
 var/log/streamcontrol
+usr/bin
