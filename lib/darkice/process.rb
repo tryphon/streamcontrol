@@ -3,7 +3,7 @@ require 'syslog_logger'
 module Darkice
   class Process
     
-    attr_accessor :config_file, :executable, :status, :last_error, :debug, :darkice_pid
+    attr_accessor :config_file, :executable, :status, :debug, :darkice_pid
 
     def initialize(options = {})
       options = {
@@ -55,6 +55,10 @@ module Darkice
       unless same_error_than_previously? error
         @last_error_event = create_event :error, error
       end
+    end
+
+    def last_error
+      @last_error_event.message if @last_error_event  
     end
 
     def same_error_than_previously?(error)
