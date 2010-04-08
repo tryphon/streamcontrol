@@ -22,6 +22,8 @@ module Darkice
                 "The darkice configuration file") { |arg| options[:config_file] = arg }
         opts.on("-e", "--executable PATH", String,
                 "The darkice executable") { |arg| options[:executable] = arg }
+        opts.on("-p", "--pidfile PATH", String,
+                "The file to store the darkice-safe process id") { |arg| options[:pid_file] = arg }
         opts.on("-d", "--debug", "Output log to the console") { |arg| options[:debug] = true }
         opts.on("-h", "--help",
                 "Show this help message.") { stdout.puts opts; exit }
@@ -32,10 +34,18 @@ module Darkice
         end
       end
 
+      pid_file = options[:pid_file]
+      if pid_file
+        File.open(pid_file, "w") { |f| f.puts ::Process.pid }
+      end
+
       process = Darkice::Process.new(options)
 
-      trap("TERM") do 
+      trap("EXIT") do 
         process.kill
+        if pid_file and File.exists?(pid_file)
+          File.delete(pid_file) 
+        end
         exit 0
       end
 
