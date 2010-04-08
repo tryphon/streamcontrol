@@ -41,6 +41,14 @@ module Darkice
 
       process = Darkice::Process.new(options)
 
+      trap("TERM") do 
+        process.kill
+        if pid_file and File.exists?(pid_file)
+          File.delete(pid_file) 
+        end
+        exit 0
+      end
+
       trap("EXIT") do 
         process.kill
         if pid_file and File.exists?(pid_file)
