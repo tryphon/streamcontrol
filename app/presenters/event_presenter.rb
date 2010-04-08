@@ -5,7 +5,7 @@ class EventPresenter
   end
 
   def localized_created_at
-    I18n.localize(@event.created_at)
+    I18n.localize(@event.created_at, :format => :log)
   end
 
   def severity_image_tag

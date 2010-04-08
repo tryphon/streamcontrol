@@ -8,9 +8,9 @@ describe "/events/index" do
   end
 
   it "should display event created_at" do
-    @events.first.stub!(:created_at).and_return(Time.parse("1 april 2010 10:00"))
+    @events.first.stub!(:created_at).and_return(Time.parse("1 april 2010 10:00:15"))
     render 'events/index'
-    response.should have_tag("td", "01 avril 2010 10:00")
+    response.should have_tag("td", "01 avril 2010 10:00:15")
   end
 
   it "should display the image associated to the severity" do

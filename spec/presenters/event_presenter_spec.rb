@@ -41,4 +41,13 @@ describe EventPresenter, :type => :helper do
 
   end
 
+  describe "localized_created_at" do
+
+    it "should display seconds" do
+      @event.created_at = Time.parse('17:00:15 UTC')
+      @presenter.localized_created_at.should match(/17:00:15$/)
+    end
+
+  end
+
 end
