@@ -46,7 +46,7 @@ class Event < ActiveRecord::Base
   end
 
   def destroy_obsolete_events
-    Event.destroy_all ["created_at < ?", 7.days.ago]
+    Event.destroy_all ["created_at < ?", 3.days.ago]
   end
 
 end

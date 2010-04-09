@@ -10,8 +10,8 @@ describe Event do
 
   it { should validate_inclusion_of :severity, :in => [ :error, :info ] }
 
-  it "should remove Events older than 7 days when a new one is created" do
-    old_event = Event.create! :message => "old", :severity => :info, :created_at => 8.days.ago
+  it "should remove Events older than 3 days when a new one is created" do
+    old_event = Event.create! :message => "old", :severity => :info, :created_at => 3.5.days.ago
     @event.save!
     Event.find_by_id(old_event).should be_nil
   end
