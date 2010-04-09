@@ -72,7 +72,17 @@ module Darkice
     def loop
       while restart?
         run
-        sleep 30 if restart?
+        if restart?
+          logger.info "darkice stopped, restart in 30s"
+          sleep 30
+        end
+      end
+    end
+
+    def sleep(time)
+      100.times do
+        Kernel.sleep time / 100.0
+        break if @killed
       end
     end
 
@@ -89,27 +99,16 @@ module Darkice
     end
 
     def restart?
-      self.last_error != :invalid_config
-    end
-
-    def check
-      reset_pipe unless running?
-    end
-
-    def reset_pipe
-      if @darkice_pipe
-        @darkice_pipe.close 
-        @darkice_pipe = nil
-      end
+      self.last_error != :invalid_config and not @killed 
     end
 
     def run
-      @darkice_pipe = IO.popen("#{executable} -v10 -c #{config_file}") do |output|
+      IO.popen("#{executable} -v10 -c #{config_file}") do |output|
         self.darkice_pid = output.pid
         logger.debug "darkice process : #{self.darkice_pid}"
 
         begin
-          while line = output.readline and self.darkice_pid
+          while line = output.readline
             log_line line.strip
           end
         rescue EOFError
@@ -126,6 +125,11 @@ module Darkice
     end
 
     def kill
+      return if @killed
+
+      @killed = true
+      logger.info "process killed"
+
       if self.darkice_pid
         logger.info "kill darkice process (#{self.darkice_pid})"
         ::Process.kill 'TERM', self.darkice_pid rescue false

@@ -2,14 +2,18 @@ require 'optparse'
 
 module Darkice
   class CLI
-    def self.execute(stdout, arguments=[])
-      options = {
+
+    attr_reader :options
+
+    def initialize
+      @options = {
         :config_file => '/etc/darkice.cfg',
         :executable => '/usr/bin/darkice'
       }
-      mandatory_options = %w(  )
+    end
 
-      parser = OptionParser.new do |opts|
+    def parse_options(stdout, arguments = [])
+      OptionParser.new do |opts|
         opts.banner = <<-BANNER.gsub(/^          /,'')
           Start and control darkice execution and errors
 
@@ -28,40 +32,50 @@ module Darkice
         opts.on("-h", "--help",
                 "Show this help message.") { stdout.puts opts; exit }
         opts.parse!(arguments)
-
-        if mandatory_options && mandatory_options.find { |option| options[option.to_sym].nil? }
-          stdout.puts opts; exit
-        end
       end
+    end
 
-      pid_file = options[:pid_file]
+    def execute(stdout, arguments=[])
+      parse_options(stdout, arguments)
+
+      init_signals
+      create_pidfile
+      process.loop
+    end
+
+    def pid_file
+      options[:pid_file]
+    end
+
+    def create_pidfile
       if pid_file
         File.open(pid_file, "w") { |f| f.puts ::Process.pid }
       end
-
-      process = Darkice::Process.new(options)
-
-      trap("TERM") do 
-        process.kill
-        if pid_file and File.exists?(pid_file)
-          File.delete(pid_file) 
-        end
-        exit 0
-      end
-
-      trap("EXIT") do 
-        process.kill
-        if pid_file and File.exists?(pid_file)
-          File.delete(pid_file) 
-        end
-        exit 0
-      end
-
-      trap("CLD") do
-        process.check
-      end
-
-      process.loop
     end
+
+    def delete_pidfile
+      if pid_file and File.exists?(pid_file)
+        File.delete(pid_file) 
+      end
+    end
+
+    def init_signals
+      trap("TERM") { self.kill }
+      trap("EXIT") { self.kill }
+    end
+
+    def process
+      @process ||= Darkice::Process.new(options)
+    end
+
+    def kill
+      @process.kill if @process
+      delete_pidfile
+    end
+
+    def self.execute(stdout, arguments=[])
+      self.new.execute stdout, arguments
+    end
+
   end
 end
