@@ -1,0 +1,27 @@
+<%= title_tag t(".title") %>
+
+<% form_for @input, :url => input_path do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :frequency, Input.human_attribute_name("frequency")+" (MHz)" %><br/>
+    <%= f.text_field :frequency %>
+  </p>
+
+  <p>
+    <%= f.label :volume, Input.human_attribute_name("volume")+" (%)" %><br/>
+    <%= f.text_field :volume %>
+  </p>
+
+  <p>
+    <%= f.label :gain, Input.human_attribute_name("gain")+" (dB)" %><br/>
+    <%= f.text_field :gain %>
+  </p>
+
+  <p>
+    <%= f.submit t(".submit") %> 
+    <%= t("or") %> <%= link_to "#{t(".cancel")} &#8250;", input_path %>
+  </p>
+
+<% end %>
+

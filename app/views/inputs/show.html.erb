@@ -1,0 +1,22 @@
+<%= title_tag Input.human_name %>
+
+<div class="description">
+  <p>
+    <%= Input.human_attribute_name("frequency") %> :
+    <%= @input.frequency %> MHz
+  </p>
+
+  <p>
+    <%= Input.human_attribute_name("volume") %> :
+    <%= @input.volume %> %
+  </p>
+
+  <p>
+    <%= Input.human_attribute_name("gain") %> :
+    <%= @input.gain %> dB
+  </p>
+</div>
+
+<div class="actions">
+  <%= link_to t("actions.edit"), edit_input_path, :class => "edit" %>
+</div>
