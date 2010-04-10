@@ -5,7 +5,7 @@ describe InputsController do
   shared_examples_for "an action on Input instance" do
 
     it "should load the Input instance" do
-      Input.should_receive(:load).and_return(Input.new)
+      Input.should_receive(:current).and_return(Input.new)
       make_request
     end
     

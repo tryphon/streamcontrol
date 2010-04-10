@@ -1,20 +1,7 @@
 <%= title_tag Input.human_name %>
 
 <div class="description">
-  <p>
-    <%= Input.human_attribute_name("frequency") %> :
-    <%= @input.frequency %> MHz
-  </p>
-
-  <p>
-    <%= Input.human_attribute_name("volume") %> :
-    <%= @input.volume %> %
-  </p>
-
-  <p>
-    <%= Input.human_attribute_name("gain") %> :
-    <%= @input.gain %> dB
-  </p>
+  <%= render @input.presenter.partial %>
 </div>
 
 <div class="actions">

@@ -7,7 +7,7 @@ class InputsController < InheritedResources::Base
   protected
 
   def resource
-    @input ||= Input.load
+    @input ||= Input.current
   end
 
 end

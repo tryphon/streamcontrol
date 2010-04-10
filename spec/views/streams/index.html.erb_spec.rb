@@ -8,7 +8,7 @@ describe "/streams/index" do
 
   it "should display a link to create a new stream" do
     render
-    response.should have_tag("a[href=?]", new_stream_path)
+    response.should have_link_to(new_stream_path)
   end
 
   it "should not display a link to create a new stream when Stream.can_create? is false" do
