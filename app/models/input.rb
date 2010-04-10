@@ -22,7 +22,7 @@ class Input < ActiveForm::Base
   end
 
   def presenter
-    @presenter ||= NetworkPresenter.new(self)
+    @presenter ||= InputPresenter.new(self)
   end
 
   private

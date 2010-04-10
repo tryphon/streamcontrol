@@ -1,23 +1,13 @@
 # -*- coding: utf-8 -*-
-class InputsController < ApplicationController
+class InputsController < InheritedResources::Base
 
-  def show
-    @input = Input.load
-  end
+  actions :show, :edit, :update
+  respond_to :html, :xml, :json
 
-  def edit
-    @input = Input.load
-  end
+  protected
 
-  def update
-    @input = Input.new(params[:input])
-    if @input.save
-      flash[:success] = "La configuration a été modifiée avec succès"
-      redirect_to input_path
-    else
-      flash[:failure] = "La configuration n'a pu été modifiée"
-      render :action => "edit"
-    end
+  def resource
+    @input ||= Input.load
   end
 
 end
