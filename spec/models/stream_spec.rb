@@ -20,6 +20,11 @@ describe Stream do
   it { should validate_presence_of :mount_point }
   it { should validate_presence_of :password }
 
+  it "should remove initial / in mount point" do
+    @stream.mount_point = "/dummy"
+    @stream.mount_point.should == "dummy"
+  end
+
   it "should validate server as a host" do
     @stream.server = "localhost"
     @stream.stub!(:validate_host).and_return(false)

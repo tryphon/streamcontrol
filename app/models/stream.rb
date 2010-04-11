@@ -11,6 +11,8 @@ class Stream < ActiveForm::Base
   acts_as_ip_port :port
   validates_presence_of :server, :port, :mount_point, :password
 
+  validates_format_of :mount_point, :with => %r{^[^/]}
+
   attr_accessor :format
   validates_presence_of :format
   validates_inclusion_of :format, :in => [ :vorbis, :mp3, :aac ]
@@ -63,6 +65,14 @@ class Stream < ActiveForm::Base
     @quality = quality ? quality.to_i : nil
   end
 
+  def mount_point=(mount_point)
+    @mount_point = mount_point ? mount_point.gsub(%r{^/}, '') : nil
+  end
+
+  def presenter
+    @presenter ||= StreamPresenter.new self
+  end
+
   @@maximum_count = 4
   cattr_accessor :maximum_count
 
@@ -80,10 +90,6 @@ class Stream < ActiveForm::Base
 
   def ==(other)
     other and self.id == other.id
-  end
-
-  def presenter
-    @presenter ||= StreamPresenter.new self
   end
 
   def update_attributes_with_save(attributes)
