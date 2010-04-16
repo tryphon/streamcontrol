@@ -1,0 +1,24 @@
+<%= title_tag t(".title") %>
+
+<h2><%= t(".last_events") %></h2>
+<table class="events">
+  <% for event in @events %>
+
+  <tr>
+    <td><%= event.presenter.severity_image_tag %></td>
+    <td><%= event.presenter.localized_created_at %></td>
+    <td><%= event.presenter.user_message %></td>
+    <td><%= event.presenter.stream_link(self) %></td>
+  </tr>
+
+  <% end %>
+</table>
+
+<%= link_to "#{t('.see_all_events')} &#8250;", events_path %>
+
+<h2><%= t(".monitoring") %></h2>
+
+<div class="dashboard_monitoring">
+<%= monitoring_preview_tag :ping , :class => "first" %>
+<%= monitoring_preview_tag :if_eth0 %>
+</div>

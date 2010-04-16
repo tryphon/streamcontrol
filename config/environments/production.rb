@@ -26,3 +26,7 @@ config.action_view.cache_template_loading            = true
 
 # Enable threaded mode
 # config.threadsafe!
+
+config.to_prepare do
+  Monitoring.munin_resources_directory = "public/images/munin"
+end

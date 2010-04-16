@@ -1,0 +1,6 @@
+<%= title_tag t(".title") %>
+
+<% @monitorings.each do |monitoring| %>
+<h2><%= monitoring.presenter.name %></h2>
+<%= monitoring_image_tag monitoring %>
+<% end %>

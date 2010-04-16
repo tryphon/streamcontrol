@@ -18,4 +18,5 @@ config.action_mailer.raise_delivery_errors = false
 
 config.to_prepare do
   Input.current_class = TunerInput
+  Monitoring.munin_resources_directory = "public/images/munin"
 end
