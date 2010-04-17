@@ -1,3 +1,9 @@
+streamcontrol (0.5-1) UNRELEASED; urgency=low
+
+  * New upstream release (with dashboard)
+
+ -- Alban Peignier <alban@tryphon.eu>  Sat, 17 Apr 2010 10:20:29 +0200
+
 streamcontrol (0.4-1) UNRELEASED; urgency=low
 
   * New upstream release (with Input support)
