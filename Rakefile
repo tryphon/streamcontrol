@@ -17,4 +17,4 @@ namespace :buildbot do
   end
 end
 
-task :buildbot => ["buildbot:setup", "spec", "spec:plugins"]
+task :buildbot => ["buildbot:setup", "db:migrate", "spec", "spec:plugins"]
