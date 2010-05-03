@@ -10,6 +10,7 @@ fr:
         mount_point: Point de montage
         password: Mot de passe
         quality: Qualité
+        enabled: Activé
     models:
       stream: Flux
   streams:
