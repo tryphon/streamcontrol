@@ -3,6 +3,9 @@ fr:
     attributes:
       stream:
         name: Nom
+        description: Description
+        genre: Genre
+        related_url: URL associée
         server: Serveur
         mount_point: Point de montage
         password: Mot de passe

@@ -4,6 +4,11 @@
   <h3><a href="#"><%= link_to stream.name, stream_path(stream) %></a></h3>
   <div class="description">
     <p>
+      Description: <%= stream.description %><br/>
+      Genre: <%= stream.genre %><br/>
+      <%= Stream.human_attribute_name("related_url") %>: <%= stream.related_url %>
+    </p>
+    <p>
       URL: <%= stream.url %>
     </p>
     <p>

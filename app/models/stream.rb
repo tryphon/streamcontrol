@@ -4,7 +4,7 @@ class Stream < ActiveForm::Base
 
   strip_attributes!
 
-  attr_accessor :name, :id
+  attr_accessor :name, :id, :description, :genre, :related_url
   validates_presence_of :name
 
   attr_accessor :server, :password, :mount_point
