@@ -77,6 +77,12 @@ namespace :spec do
     t.spec_files = FileList['spec/**/*_spec.rb']
   end
 
+  desc "Print html for all specs (excluding plugin specs)"
+  Spec::Rake::SpecTask.new(:html) do |t|
+    t.spec_opts = ["--format", "html:spec.html"]
+    t.spec_files = FileList['spec/**/*_spec.rb']
+  end
+
   desc "Print Specdoc for all plugin examples"
   Spec::Rake::SpecTask.new(:plugin_doc) do |t|
     t.spec_opts = ["--format", "specdoc", "--dry-run"]
