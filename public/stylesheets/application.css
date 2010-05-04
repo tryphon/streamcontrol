@@ -10,3 +10,5 @@ div.dashboard_monitoring {
 div.dashboard_monitoring img {
     padding-right: 5px;
 }
+
+#content .actions .install { background: url("../images/install.png") no-repeat; }

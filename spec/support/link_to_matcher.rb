@@ -8,4 +8,5 @@ end
 
 Spec::Runner.configure do |config|
   config.include LinkToMatcher, :type => :view
+  config.include LinkToMatcher, :type => :helper
 end

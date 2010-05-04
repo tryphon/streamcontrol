@@ -5,6 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :input
   map.resource :dashboard
   map.resources :monitorings
+  map.resources :releases, :member => { :download => :get, :install => :get }
 
   map.root :controller => "welcome"
   

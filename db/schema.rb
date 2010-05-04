@@ -9,13 +9,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100330065035) do
+ActiveRecord::Schema.define(:version => 20100428174459) do
 
   create_table "events", :force => true do |t|
     t.string   "message"
     t.string   "severity"
     t.integer  "stream_id"
     t.datetime "created_at"
+  end
+
+  create_table "releases", :force => true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.string   "checksum"
+    t.string   "description_url"
+    t.string   "status"
+    t.datetime "status_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
