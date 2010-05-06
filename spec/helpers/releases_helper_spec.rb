@@ -43,6 +43,10 @@ describe ReleasesHelper do
         helper.link_to_action(release).should have_link_to(releases_path)
       end
 
+      it "should return a link with download-pending class (for javascript ReleaseDownloadObserver)" do
+        helper.link_to_action(release).should have_tag("a[class=download-pending]")
+      end
+
     end
 
     context "when release is in another state" do

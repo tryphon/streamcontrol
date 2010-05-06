@@ -93,12 +93,11 @@ class Release < ActiveRecord::Base
     save!
   end
 
-  def download
-    download!
-    true
-  rescue => e
-    logger.error "Download of #{url} failed : #{e}"
-    false
+  def start_download
+    return if self.status.downloaded?
+
+    update_attribute :status, :download_pending
+    send_later :download!
   end
 
   @@install_command = nil

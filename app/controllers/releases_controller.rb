@@ -2,7 +2,8 @@ class ReleasesController < InheritedResources::Base
 
   before_filter :check_releases
 
-  actions :index
+  actions :index, :show
+  respond_to :html, :xml, :json
 
   def index
     index! do |format|
@@ -14,7 +15,7 @@ class ReleasesController < InheritedResources::Base
   end
 
   def download
-    resource.download
+    resource.start_download
     redirect_to releases_path
   end
 
@@ -23,7 +24,19 @@ class ReleasesController < InheritedResources::Base
     redirect_to releases_path
   end
 
-  private
+  protected
+
+  def resource_with_name
+    case params[:id]
+    when "current"
+      @release ||= Release.current
+    when "latest"
+      @release ||= Release.latest
+    else
+      resource_without_name
+    end
+  end
+  alias_method_chain :resource, :name
 
   def check_releases
     Release.check

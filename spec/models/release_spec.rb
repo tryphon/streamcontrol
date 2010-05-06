@@ -144,22 +144,45 @@ describe Release do
 
   end
 
-  describe "download" do
+  describe "download!" do
 
     let(:release) { Release.new :name => "test", :url => "public/updates/streambox-update-20100421-0846.tar" }
 
     before(:each) do
       FileUtils.rm_f(release.file)
+      release.stub :valid_checksum? => true
     end
     
     it "should 'copy' url content into file" do
-      release.download
+      release.download!
       FileUtils.compare_file(release.file, release.url)
     end
 
-    it "should return true if checksum is valid" do
-      release.stub :valid_checksum? => true
-      release.download.should be_true
+    it "should raise an error if checksum is invalid" do
+      release.stub :valid_checksum? => false
+      lambda { release.download! }.should raise_error
+    end
+
+  end
+
+  describe "start_download" do
+    
+    it "should send_later download! method" do
+      release.should_receive(:send_later).with(:download!)
+      release.start_download
+    end
+
+    it "should change status to download_pending" do
+      release.stub! :send_later
+      lambda {
+        release.start_download
+      }.should change(release, :status).to("download_pending")
+    end
+
+    it "should return if release is already downloaded" do
+      release.status = :downloaded
+      release.should_not_receive(:send_later).with(:download!)
+      release.start_download
     end
 
   end
@@ -169,7 +192,7 @@ describe Release do
     let(:release) { Release.new :name => "test", :url => "public/updates/streambox-update-20100421-0846.tar" }
 
     before(:each) do
-      release.download
+      release.stub :file => release.url
     end
 
     it "should return true if checksum is SHA256 digest of downloaded file" do
@@ -188,7 +211,7 @@ describe Release do
     end
 
     it "should return false if download file isn't found" do
-      File.delete release.file
+      release.stub!(:file_checksum)
       release.should_not be_valid_checksum
     end
 

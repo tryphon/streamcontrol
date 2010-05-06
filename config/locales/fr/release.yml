@@ -4,7 +4,7 @@ fr:
       installed: Installée
       available: Disponible
       downloaded: Téléchargée
-      downloading: En cours de téléchargement
+      download_pending: En cours de téléchargement
     release:
       since: depuis le
     index:
