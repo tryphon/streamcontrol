@@ -8,7 +8,7 @@ module ReleasesHelper
     if release.status.downloaded?
       link_to t("releases.actions.install_and_reboot"), install_release_path(release), :class => "install"
     elsif release.status.download_pending?
-      link_to t("releases.actions.download_pending"), releases_path, :class => "download-pending"
+      link_to t("releases.actions.download_pending"), releases_path, :class => "download-pending", :"data-release-id" => release.id
     else
       link_to t("releases.actions.download"), download_release_path(release), :class => "download"
     end

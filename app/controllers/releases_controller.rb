@@ -24,6 +24,10 @@ class ReleasesController < InheritedResources::Base
     redirect_to releases_path
   end
 
+  def description
+    render resource
+  end
+
   protected
 
   def resource_with_name

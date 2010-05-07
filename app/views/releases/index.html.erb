@@ -5,7 +5,9 @@
 <h2><%= t(".available_upgrade") %></h2>
 
 <div class="description">
-  <%= render @latest %>
+  <% div_for(@latest, :id => "latest") do %>
+    <%= render @latest %>
+  <% end %>
 
   <div class="actions">
     <%= link_to_action @latest %>

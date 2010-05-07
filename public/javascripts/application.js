@@ -1,7 +1,7 @@
 Event.observe(window, "load", function() {
     download_pending_event = $$('.download-pending').first();
     if (download_pending_event) {
-        new ReleaseDownloadObserver(download_pending_event.href, "latest");
+        new ReleaseDownloadObserver(download_pending_event.href, download_pending_event.getAttribute("data-release-id"));
     };
 });
 
@@ -18,14 +18,19 @@ ReleaseDownloadObserver = Class.create({
     },
     reload_when_downloaded: function(transport) {
         var release = transport.responseText.evalJSON().release;
-        if (release.status == 'downloaded') {
-            window.location = this.base_url;
+        if (release.status != 'download_pending') {
+            reload_page();
         }
     },
+    reload_page: function() {
+        window.location = this.base_url;
+    },
     check_if_release_is_downloaded: function() {
-        new Ajax.Request(this.base_url + "/" + this.identifier + ".json", { asynchronous: true, evalScripts: true, method: 'get', onSuccess: this.reload_when_downloaded.bind(this)});
+        new Ajax.Updater({ success: 'release_' + this.identifier }, this.base_url + '/' + this.identifier + "/description", {
+            method: 'get', onSuccess: this.reload_when_downloaded.bind(this), onFailure: this.reload_page.bind(this)
+        });
     },
     periodical_executer: function() {
-        new PeriodicalExecuter(this.check_if_release_is_downloaded.bind(this), 5);
+        new PeriodicalExecuter(this.check_if_release_is_downloaded.bind(this), 10);
     }
 });

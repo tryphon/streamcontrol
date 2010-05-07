@@ -1,4 +1,4 @@
-class EventPresenter
+class EventPresenter < Presenter
 
   def initialize(event)
     @event = event
@@ -26,21 +26,6 @@ class EventPresenter
     else
       @event.stream_id ? "#{Stream.human_name} #{@event.stream_id}" : ""
     end
-  end
-
-  def helpers
-    master_helper_module = [ActionView::Helpers::AssetTagHelper, ActionView::Helpers::UrlHelper]
-    @helper_proxy ||= HelperProxy.new(self, master_helper_module)
-  end
-
-end
-
-class HelperProxy < ActionView::Base
-
-  def initialize(controller, master_helper_module)
-    # required by url_for for example
-    @controller = controller
-    Array(master_helper_module).each { |m| extend m }
   end
 
 end

@@ -18,7 +18,7 @@ class Release < ActiveRecord::Base
 
   def self.check_latest
     Loader.save_release_at(latest_url) do |release|
-      release.force_status :available
+      release.status = :available
       release.newer?(last)
     end
   end
@@ -28,7 +28,7 @@ class Release < ActiveRecord::Base
 
   def self.check_current
     Loader.save_release_at(current_url) do |release|
-      release.force_status :installed
+      release.status = :installed
       true
     end
   end
@@ -58,11 +58,7 @@ class Release < ActiveRecord::Base
 
   def status=(status, update_timestamp = true)
     write_attribute :status, status ? status.to_s : nil
-    self.status_updated_at = Time.now if update_timestamp
-  end
-
-  def force_status(status)
-    self.send("status=", status, false)
+    self.status_updated_at = Time.now unless new_record?
   end
 
   def file
@@ -80,7 +76,9 @@ class Release < ActiveRecord::Base
   def download!
     return if self.status.downloaded?
 
-    open(url) do |u|
+    update_attribute :status, :download_pending
+
+    open_url do |u|
       File.open(file, "w") do |f|
         FileUtils.copy_stream(u, f)
       end
@@ -91,6 +89,29 @@ class Release < ActiveRecord::Base
   ensure
     self.status = :download_failed unless self.status.downloaded?
     save!
+  end
+
+  def open_url(&block)
+    if URI.parse(url).scheme == "http"
+      options = {
+        :content_length_proc => lambda { |content_length| update_attribute(:url_size, content_length) }, 
+        :progress_proc => lambda { |size| update_download_size(size) }
+      }
+      open url, options, &block
+    else
+      open url, &block
+    end
+  end
+
+  def update_download_size(size)
+    if @updated_download_size_at 
+      if 10.seconds.ago > @updated_download_size_at
+        update_attribute(:download_size, size)
+        @updated_download_size_at = Time.now
+      end
+    else
+      @updated_download_size_at = Time.now
+    end
   end
 
   def start_download

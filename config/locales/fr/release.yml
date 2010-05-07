@@ -5,6 +5,7 @@ fr:
       available: Disponible
       downloaded: Téléchargée
       download_pending: En cours de téléchargement
+      download_failed: Téléchargement échoué
     release:
       since: depuis le
     index:
