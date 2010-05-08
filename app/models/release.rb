@@ -178,6 +178,9 @@ class Release < ActiveRecord::Base
 
     def attributes
       @attributes ||= YAML.load open(url,&:read) 
+    rescue => e
+      Rails.logger.error "Can't load attributes from #{url} : #{e}"
+      {}
     end
 
     def supported_attributes

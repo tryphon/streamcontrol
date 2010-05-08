@@ -289,7 +289,9 @@ end
 describe Release::Loader do
   
   describe "#attributes" do
-    
+
+    let(:loader) { Release::Loader.new("dummy") }
+
     it "should load attributes found in url" do
       Tempfile.open("release-loader") do |file|
         file.puts "dummy: true"
@@ -297,6 +299,11 @@ describe Release::Loader do
 
         Release::Loader.new(file.path).attributes.should == { "dummy" => true }
       end
+    end
+
+    it "should be empty if url isn't reachable" do
+      loader.stub(:open).and_raise(SocketError)
+      loader.attributes.should be_empty
     end
 
   end
