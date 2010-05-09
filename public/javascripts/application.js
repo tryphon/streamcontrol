@@ -18,19 +18,29 @@ ReleaseDownloadObserver = Class.create({
     },
     reload_when_downloaded: function(transport) {
         var release = transport.responseText.evalJSON().release;
+        console.log(release);
         if (release.status != 'download_pending') {
-            reload_page();
+            this.reload_page();
         }
     },
     reload_page: function() {
         window.location = this.base_url;
     },
     check_if_release_is_downloaded: function() {
-        new Ajax.Updater({ success: 'release_' + this.identifier }, this.base_url + '/' + this.identifier + "/description", {
-            method: 'get', onSuccess: this.reload_when_downloaded.bind(this), onFailure: this.reload_page.bind(this)
+        new Ajax.Request(this.base_url + "/" + this.identifier + ".json", { 
+            asynchronous: true, evalScripts: true, method: 'get', onSuccess: this.reload_when_downloaded.bind(this)
         });
     },
+    update_release_description: function() {
+        new Ajax.Updater({ success: 'release_' + this.identifier }, this.base_url + '/' + this.identifier + "/description", {
+            method: 'get', onFailure: this.reload_page.bind(this)
+        });
+    },
+    update_release: function() {
+        this.check_if_release_is_downloaded();
+        this.update_release_description();
+    },
     periodical_executer: function() {
-        new PeriodicalExecuter(this.check_if_release_is_downloaded.bind(this), 10);
+        new PeriodicalExecuter(this.update_release.bind(this), 5);
     }
 });
