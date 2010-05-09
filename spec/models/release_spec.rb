@@ -6,13 +6,7 @@ describe Release do
 
   let(:release) { Release.new }
   
-  context "named :test" do
-
-    subject { Release.new :name => "test" }
-
-    its(:file) { should == "/tmp/test.tar" }
-
-  end
+  its(:file) { should == "/tmp/release.tar" }
 
   context "after initialize" do
     
@@ -269,7 +263,7 @@ describe Release do
 
   describe "#tempfile_with_attribute" do
     
-    let(:tempfile) { stub :path => "/path/to/tempfile", :puts => true }
+    let(:tempfile) { stub :path => "/path/to/tempfile", :puts => true, :flush => true }
 
     before(:each) do
       Tempfile.stub!(:open).and_yield(tempfile)
