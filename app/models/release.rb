@@ -62,7 +62,7 @@ class Release < ActiveRecord::Base
   end
 
   def file
-    "/tmp/#{name}.tar"
+    "/tmp/release.tar"
   end
 
   def newer?(other)
@@ -118,6 +118,8 @@ class Release < ActiveRecord::Base
   def tempfile_with_attributes(&block)
     Tempfile.open("release-#{name}") do |yaml_file|
       yaml_file.puts self.attributes.to_yaml
+      yaml_file.flush
+
       yield yaml_file.path
     end
   end
