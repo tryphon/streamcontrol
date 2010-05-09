@@ -78,9 +78,13 @@ class Release < ActiveRecord::Base
 
     update_attribute :status, :download_pending
 
-    open_url do |u|
-      File.open(file, "w") do |f|
-        FileUtils.copy_stream(u, f)
+    File.open(file, "w") do |file|
+      Downloader.open(url) do |data, download_size, url_size|
+        file.write data
+
+        self.url_size ||= url_size
+        self.download_size = download_size
+        save! if 10.seconds.ago > self.updated_at
       end
     end
 
@@ -89,29 +93,6 @@ class Release < ActiveRecord::Base
   ensure
     self.status = :download_failed unless self.status.downloaded?
     save!
-  end
-
-  def open_url(&block)
-    if URI.parse(url).scheme == "http"
-      options = {
-        :content_length_proc => lambda { |content_length| update_attribute(:url_size, content_length) }, 
-        :progress_proc => lambda { |size| update_download_size(size) }
-      }
-      open url, options, &block
-    else
-      open url, &block
-    end
-  end
-
-  def update_download_size(size)
-    if @updated_download_size_at 
-      if 10.seconds.ago > @updated_download_size_at
-        update_attribute(:download_size, size)
-        @updated_download_size_at = Time.now
-      end
-    else
-      @updated_download_size_at = Time.now
-    end
   end
 
   def start_download
