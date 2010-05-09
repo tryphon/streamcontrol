@@ -66,7 +66,7 @@ class Release < ActiveRecord::Base
   end
 
   def newer?(other)
-    other.nil? or self.name > other.name
+    other.nil? or (self.name and self.name > other.name)
   end
 
   def presenter

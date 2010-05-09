@@ -63,6 +63,11 @@ describe Release do
       release.should be_newer(stub(:name => "version-1"))
     end
 
+    it "should be false when name is nil" do
+      release.name = nil
+      release.should_not be_newer(stub(:name => "version-1"))
+    end
+
   end
 
   describe ".check_latest" do
@@ -82,6 +87,12 @@ describe Release do
     it "should set release status to :available" do
       Release.check_latest
       latest.status.should be_available
+    end
+
+    it "should not save the latest release if not newer the last one" do
+      Release.stub :last => Release.new
+      latest.should_receive(:newer?).with(Release.last).and_return(false)
+      Release.check_latest.should be_false
     end
 
     it "should not save the latest release if not newer the last one" do
