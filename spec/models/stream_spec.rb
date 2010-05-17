@@ -134,21 +134,28 @@ describe Stream do
       
     end
 
-    describe "server" do
+    def self.it_should_use_last_stream(attribute)
+      describe attribute.to_s do
 
-      subject { Stream.default_attributes[:server] }
-      
-      it "should be nil if no other stream exists" do
-        Stream.stub!(:last)
-        should be_nil
+        subject { Stream.default_attributes[attribute] }
+        
+        it "should be nil if no other stream exists" do
+          Stream.stub!(:last)
+          should be_nil
+        end
+
+        it "should use the last stream #{attribute}" do
+          Stream.stub :last => Stream.new(attribute => "dummy")
+          should == "dummy"
+        end
+
       end
-
-      it "should use the last stream server" do
-        Stream.stub :last => Stream.new(:server => "dummy")
-        should == "dummy"
-      end
-
     end
+
+    it_should_use_last_stream :server
+    it_should_use_last_stream :description
+    it_should_use_last_stream :genre
+    it_should_use_last_stream :related_url
 
   end
 

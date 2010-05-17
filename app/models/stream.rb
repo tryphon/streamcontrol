@@ -35,7 +35,10 @@ class Stream < ActiveForm::Base
     if reference_stream = Stream.last
       { 
         :server => reference_stream.server,
-        :port => reference_stream.port
+        :port => reference_stream.port,
+        :description => reference_stream.description,
+        :genre => reference_stream.genre,
+        :related_url => reference_stream.related_url
       }.with_indifferent_access
     else
       { 
