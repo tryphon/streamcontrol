@@ -37,6 +37,11 @@ describe Stream do
     @stream.password.should == "dummy"
   end
 
+  it "should use Stream.default_attributes for a new Stream" do
+    Stream.stub :default_attributes => { :server => "dummy" }
+    Stream.new.server.should == "dummy"
+  end
+
   describe "format" do
 
     it { should validate_presence_of :format }
@@ -111,30 +116,38 @@ describe Stream do
 
   end
 
-  describe "default_port" do
+  describe "default_attributes" do
     
-    it "should be 8000 if no other stream exists" do
-      Stream.stub!(:all).and_return([])
-      Stream.default_port.should == 8000
+    describe "port" do
+
+      subject { Stream.default_attributes[:port] }
+
+      it "should be 8000 if no other stream exists" do
+        Stream.stub! :last
+        should == 8000
+      end
+
+      it "should use the last stream port" do
+        Stream.stub :last => Stream.new(:port => 80)
+        should == 80
+      end
+      
     end
 
-    it "should use the last stream port" do
-      Stream.stub!(:all).and_return([mock(Stream), mock(Stream, :port => 80)])
-      Stream.default_port.should == 80
-    end
+    describe "server" do
 
-  end
+      subject { Stream.default_attributes[:server] }
+      
+      it "should be nil if no other stream exists" do
+        Stream.stub!(:last)
+        should be_nil
+      end
 
-  describe "default_server" do
-    
-    it "should be nil if no other stream exists" do
-      Stream.stub!(:all).and_return([])
-      Stream.default_server.should be_nil
-    end
+      it "should use the last stream server" do
+        Stream.stub :last => Stream.new(:server => "dummy")
+        should == "dummy"
+      end
 
-    it "should use the last stream server" do
-      Stream.stub!(:all).and_return([mock(Stream), mock(Stream, :server => "dummy")])
-      Stream.default_server.should == "dummy"
     end
 
   end

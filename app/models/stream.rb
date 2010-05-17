@@ -27,26 +27,21 @@ class Stream < ActiveForm::Base
     self.format ||= :vorbis
     self.quality ||= 4
     if new_record?
-      self.server ||= Stream.default_server
-      self.port ||= Stream.default_port
+      self.attributes = Stream.default_attributes.update(self.attributes)
     end
   end
 
-  def self.stream_by_default(&block)
-    stream = Stream.all.last
-    if stream and block_given?
-      yield stream
+  def self.default_attributes
+    if reference_stream = Stream.last
+      { 
+        :server => reference_stream.server,
+        :port => reference_stream.port
+      }.with_indifferent_access
     else
-      stream
+      { 
+        :port => 8000
+      }.with_indifferent_access
     end
-  end
-
-  def self.default_server
-    stream_by_default(&:server)
-  end
-
-  def self.default_port
-    stream_by_default(&:port) or 8000
   end
 
   def url
@@ -137,6 +132,10 @@ class Stream < ActiveForm::Base
   def self.find(id)
     id = id.to_i
     all.find { |stream| stream.id == id }
+  end
+
+  def self.last
+    all.last
   end
 
 end
