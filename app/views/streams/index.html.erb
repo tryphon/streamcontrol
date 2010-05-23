@@ -1,26 +1,6 @@
 <%= title_tag t(".title") %>
 
-<% for stream in @streams %>
-  <h3><a href="#"><%= link_to stream.name, stream_path(stream) %></a></h3>
-  <div class="description">
-    <p>
-      Description: <%= stream.description %><br/>
-      Genre: <%= stream.genre %><br/>
-      <%= Stream.human_attribute_name("related_url") %>: <%= stream.related_url %><br/>
-      <%= Stream.human_attribute_name("enabled") %>: <%= stream.enabled.to_s %>
-    </p>
-    <p>
-      URL: <%= stream.url %>
-    </p>
-    <p>
-      Format: <%= stream.presenter.format.name %>, <%= Stream.human_attribute_name("quality") %> <%= stream.quality %>
-    </p>
-  </div>
-  <div class="actions">
-    <%= link_to t("actions.show"), stream, :class => "view" %>
-    <%= link_to t("actions.edit"), edit_stream_path(stream), :class => "edit" %>
-  </div>
-<% end %>
+<%= render @streams %>
 
 <div class="inline_help">
   <p>

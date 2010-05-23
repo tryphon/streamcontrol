@@ -7,9 +7,12 @@ en:
     show:
       server_attributes: Server parameters
       format_attributes: Audio format 
+      description_attributes: Stream description
+      no_description_attributes: No given description
     form:
       server_attributes: Server parameters
       format_attributes: Audio format 
+      description_attributes: Stream description (optional)
     new:
       title: Add a stream
       submit: Add

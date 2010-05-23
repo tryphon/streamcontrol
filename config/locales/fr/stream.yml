@@ -21,9 +21,12 @@ fr:
     show:
       server_attributes: Accès au serveur
       format_attributes: Compression audio
+      description_attributes: Description du flux
+      no_description_attributes: Pas de description précisée
     form:
       server_attributes: Accès au serveur
       format_attributes: Compression audio
+      description_attributes: Description du flux (optionnelle)
     new:
       title: Ajouter un flux
       submit: Ajouter

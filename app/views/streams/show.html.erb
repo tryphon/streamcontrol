@@ -1,23 +1,6 @@
 <%= title_tag "#{Stream.human_name} #{@stream.name}" %>
 
 <div class="description">
-  <h3>Description</h3>
-  <p>
-    <%= Stream.human_attribute_name("description") %> :
-    <%= @stream.description %>
-  </p>
-  <p>
-    <%= Stream.human_attribute_name("genre") %> :
-    <%= @stream.genre %>
-  </p>
-  <p>
-    <%= Stream.human_attribute_name("related_url") %> :
-    <%= @stream.related_url %>
-  </p>
-  <p>
-    <%= Stream.human_attribute_name("enabled") %> :
-    <%= @stream.enabled %>
-  </p>
   <h3><%= t(".server_attributes") %></h3>
   <p>
     <%= Stream.human_attribute_name("server") %> :
@@ -49,6 +32,36 @@
   <p>
     <%= Stream.human_attribute_name("quality") %> :
     <%= @stream.quality %>
+  </p>
+
+  <h3><%= t(".description_attributes") %></h3>
+  <% unless @stream.description.blank? %>
+  <p>
+    <%= Stream.human_attribute_name("description") %> :
+    <%= @stream.description %>
+  </p>
+  <% end %>
+  <% unless @stream.genre.blank? %>
+  <p>
+    <%= Stream.human_attribute_name("genre") %> :
+    <%= @stream.genre %>
+  </p>
+  <% end %>
+  <% unless @stream.related_url.blank? %>
+  <p>
+    <%= Stream.human_attribute_name("related_url") %> :
+    <%= @stream.related_url %>
+  </p>
+  <% end %>
+  <% if @stream.presenter.blank_description_attributes? %>
+    <p>
+      <%= t(".no_description_attributes") %>
+    </p>
+  <% end %>
+
+  <p>
+    <%= Stream.human_attribute_name("enabled") %> :
+    <%= @stream.enabled %>
   </p>
 </div>
 

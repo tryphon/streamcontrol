@@ -3,21 +3,6 @@
   <%= form.text_field :name %>
 </p>
 
-<p>
-  <%= form.label :description, Stream.human_attribute_name("description") %><br/>
-  <%= form.text_field :description %>
-</p>
-
-<p>
-  <%= form.label :genre, Stream.human_attribute_name("genre") %><br/>
-  <%= form.text_field :genre %>
-</p>
-
-<p>
-  <%= form.label :related_url, Stream.human_attribute_name("related_url") %><br/>
-  <%= form.text_field :related_url %>
-</p>
-
 <h3><%= t(".server_attributes") %></h3>
 
 <p>
@@ -57,3 +42,19 @@
   <%= form.check_box :enabled %>
 </p>
 
+<h3><%= t(".description_attributes") %></h3>
+
+<p>
+  <%= form.label :description, Stream.human_attribute_name("description") %><br/>
+  <%= form.text_field :description %>
+</p>
+
+<p>
+  <%= form.label :genre, Stream.human_attribute_name("genre") %><br/>
+  <%= form.text_field :genre %>
+</p>
+
+<p>
+  <%= form.label :related_url, Stream.human_attribute_name("related_url") %><br/>
+  <%= form.text_field :related_url, :size => 50 %>
+</p>
