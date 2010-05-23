@@ -14,6 +14,10 @@ fr:
     models:
       stream: Flux
   streams:
+    disabled: désactivé
+    actions:
+      disable: Désactiver
+      enable: Rétablir
     index:
       title: Flux gérés
       actions:

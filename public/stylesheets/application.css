@@ -12,3 +12,10 @@ div.dashboard_monitoring img {
 }
 
 #content .actions .install { background: url("../images/install.png") no-repeat; }
+#content .actions .disable { background: url("../images/disable.png") no-repeat; }
+#content .actions .enable { background: url("../images/enable.png") no-repeat; }
+
+div.stream.description.disabled p {
+    color: #777;
+}
+

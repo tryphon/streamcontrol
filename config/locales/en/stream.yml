@@ -1,5 +1,9 @@
 en:
   streams:
+    disabled: disabled
+    actions:
+      disable: Disable
+      enable: Enable
     index:
       title: Streams
       actions:

@@ -1,6 +1,6 @@
-<%= title_tag "#{Stream.human_name} #{@stream.name}" %>
+<%= title_tag "#{Stream.human_name} #{@stream.presenter.name_with_status}" %>
 
-<div class="description">
+<div class="stream description <%= @stream.presenter.status_class %>">
   <h3><%= t(".server_attributes") %></h3>
   <p>
     <%= Stream.human_attribute_name("server") %> :
@@ -58,14 +58,14 @@
       <%= t(".no_description_attributes") %>
     </p>
   <% end %>
-
-  <p>
-    <%= Stream.human_attribute_name("enabled") %> :
-    <%= @stream.enabled %>
-  </p>
 </div>
 
 <div class="actions">
+  <% if @stream.enabled? %>
+  <%= link_to t("streams.actions.disable"), toggle_stream_path(@stream), :class => "disable", :method => :put %>
+  <% else %>
+  <%= link_to t("streams.actions.enable"), toggle_stream_path(@stream), :class => "enable", :method => :put %>
+  <% end %>
   <%= link_to t("actions.edit"), edit_stream_path(@stream), :class => "edit" %>
   <%= link_to t("actions.destroy"), @stream, :confirm => t("destroy.confirm"), :method => :delete, :class => "destroy" %>
 </div>

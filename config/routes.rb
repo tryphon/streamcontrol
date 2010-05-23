@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.resources :streams
+  map.resources :streams, :member => { :toggle => :put }
   map.resources :events
   map.resource :input
   map.resource :dashboard

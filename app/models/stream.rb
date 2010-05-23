@@ -26,6 +26,8 @@ class Stream < ActiveForm::Base
   def after_initialize
     self.format ||= :vorbis
     self.quality ||= 4
+    self.enabled = true if self.enabled.nil?
+
     if new_record?
       self.attributes = Stream.default_attributes.update(self.attributes)
     end
@@ -65,6 +67,20 @@ class Stream < ActiveForm::Base
 
   def mount_point=(mount_point)
     @mount_point = mount_point ? mount_point.gsub(%r{^/}, '') : nil
+  end
+
+  alias_method :enabled?, :enabled
+  def disabled?
+    not enabled?
+  end
+
+  def enabled=(enabled)
+    @enabled = [true, 1, "true", "1"].include?(enabled)
+  end
+
+  def toggle(attribute)
+    self[attribute] = !send("#{attribute}?")
+    self
   end
 
   def presenter

@@ -37,11 +37,6 @@
   <%= form.collection_select :quality, 0..10, :to_i, :to_s %>
 </p>
 
-<p>
-  <%= form.label :enabled, Stream.human_attribute_name("enabled") %><br/>
-  <%= form.check_box :enabled %>
-</p>
-
 <h3><%= t(".description_attributes") %></h3>
 
 <p>

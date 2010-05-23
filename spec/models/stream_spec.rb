@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Stream do
 
+  let(:stream) { Stream.new }
+
   before(:each) do
     @stream = Stream.new
 
@@ -40,6 +42,18 @@ describe Stream do
   it "should use Stream.default_attributes for a new Stream" do
     Stream.stub :default_attributes => { :server => "dummy" }
     Stream.new.server.should == "dummy"
+  end
+
+  it "should use vorbis format for a new Stream" do
+    Stream.new.format.should == :vorbis
+  end
+
+  it "should use quality 4 for a new Stream" do
+    Stream.new.quality.should == 4
+  end
+
+  it "should enable a new Stream" do
+    Stream.new.should be_enabled
   end
 
   describe "format" do
@@ -269,6 +283,13 @@ describe Stream do
         Stream.all.collect(&:id).should == (1..4).to_a
       end
 
+      it "should load enabled attribute defined by stream_<n>_enabled keys" do
+        4.times do |n|
+          @puppet_configuration["stream_#{n+1}_enabled"] = n.odd?
+        end
+        Stream.all.collect(&:enabled).should == [ false, true, false, true ]
+      end
+
     end
 
     describe "find" do
@@ -301,4 +322,34 @@ describe Stream do
     end
 
   end
+
+  describe "enabled=" do
+    
+    it "should enable stream with 1" do
+      stream.enabled=1
+      stream.should be_enabled
+    end
+
+    it "should enable stream with true" do
+      stream.enabled=true
+      stream.should be_enabled
+    end
+
+    it "should enable stream with 'true'" do
+      stream.enabled='true'
+      stream.should be_enabled
+    end
+
+    it "should enable stream with '1'" do
+      stream.enabled='1'
+      stream.should be_enabled
+    end
+
+    it "should disable stream with anything else" do
+      stream.enabled = mock
+      stream.should be_disabled
+    end
+
+  end
+
 end

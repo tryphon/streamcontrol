@@ -39,4 +39,26 @@ describe "/streams/show" do
     response.should have_tag("p", /message when no description attributes/)
   end
 
+  it "should display a link to edit the stream" do
+    render
+    response.should have_link_to(edit_stream_path(stream))
+  end
+
+  it "should display a link to destroy the stream" do
+    render
+    response.should have_link_to(stream_path(stream), :class => "destroy")
+  end
+
+  it "should display a link to enable the stream when disabled" do
+    stream.enabled = false
+    render
+    response.should have_link_to(toggle_stream_path(stream), :class => "enable")
+  end
+
+  it "should display a link to disable the stream when enable" do
+    stream.enabled = true
+    render
+    response.should have_link_to(toggle_stream_path(stream), :class => "disable")
+  end
+
 end

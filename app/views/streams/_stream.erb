@@ -1,5 +1,5 @@
-<h3><a href="#"><%= link_to stream.name, stream_path(stream) %></a></h3>
-<div class="description">
+<h3><a href="#"><%= link_to stream.presenter.name_with_status, stream_path(stream) %></a></h3>
+<div class="stream description <%= stream.presenter.status_class %>">
   <% unless stream.description.blank? %>
   <p>
     <%= Stream.human_attribute_name("description") %>: <%= stream.description %>
