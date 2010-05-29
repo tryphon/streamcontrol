@@ -234,6 +234,11 @@ strong { font-weight: bold; }
   font-size: 90%;
   margin: 4px 0;
 }
+#sidebar p.languages {
+  margin: -5px 0 10px 0;
+  padding: 0px;
+  text-align: center;
+}
 #sidebar form.search { margin: 0; }
 #sidebar form.search input {
   float: left;

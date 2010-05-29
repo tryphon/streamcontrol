@@ -41,10 +41,16 @@
           <li><%= link_to SavePoint.human_name, new_save_point_path %></li>
         </ul>
 
+        <p class="languages">
+          <%= link_to_language(:en) %>
+          <%= link_to_language(:fr) %>
+        </p>
+
         <h2><%= t(".information.title") %></h2>
         <p>
           <%= t(".information.text") %>
         </p>
+
       </div>
     </div>
     <hr/>
