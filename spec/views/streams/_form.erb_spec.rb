@@ -5,7 +5,7 @@ describe "/streams/_form" do
   before(:each) do
     assigns[:stream] = @stream = Stream.new(:id => 1)
 
-    @form_builder = stub :text_field => '<input type="text"/>', :label => '<label/>', :collection_select => "<select/>", :check_box => '<input type="checkbox"/>'
+    @form_builder = stub :text_field => '<input type="text"/>', :label => '<label/>', :collection_select => "<select/>", :check_box => '<input type="checkbox"/>', :select => '<select/>'
 
     template.stub!(:format_radio_buttons)
   end

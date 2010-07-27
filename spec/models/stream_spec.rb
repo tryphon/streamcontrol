@@ -19,7 +19,6 @@ describe Stream do
 
   it { should validate_presence_of :server }
   it { should validate_presence_of :port }
-  it { should validate_presence_of :mount_point }
   it { should validate_presence_of :password }
 
   it "should remove initial / in mount point" do
@@ -44,16 +43,50 @@ describe Stream do
     Stream.new.server.should == "dummy"
   end
 
-  it "should use vorbis format for a new Stream" do
-    Stream.new.format.should == :vorbis
+  describe "for a new Stream" do
+
+    subject { Stream.new }
+
+    its(:format) { should == :vorbis }
+    its(:quality) { should == 4 }
+    it { should be_enabled }
+    its(:server_type) { should == :icecast2 }
+    
   end
 
-  it "should use quality 4 for a new Stream" do
-    Stream.new.quality.should == 4
+
+  describe "server_type" do
+
+    it { should validate_presence_of :server_type }
+    
+    it "should support :icecast2 and :shoutcast" do
+      @stream.should allow_values_for :server_type, :icecast2, :shoutcast
+      @stream.should_not allow_values_for :server_type, :dummy
+    end
+
+    it "should be symbolized" do
+      @stream.server_type = "dummy"
+      @stream.server_type.should == :dummy
+    end
+
   end
 
-  it "should enable a new Stream" do
-    Stream.new.should be_enabled
+  describe "mount_point" do
+
+    context "when server is an icecast server" do
+      before(:each) do
+        subject.stub :icecast_server? => true
+      end
+      it { should validate_presence_of :mount_point }
+    end
+
+    context "when server is not an icecast server" do
+      before(:each) do
+        subject.stub :icecast_server? => false
+      end
+      it { should_not validate_presence_of :mount_point }
+    end
+    
   end
 
   describe "format" do
@@ -62,7 +95,7 @@ describe Stream do
     
     it "should support :vorbis, :mp3 and :aac" do
       @stream.should allow_values_for :format, :vorbis, :mp3, :aac
-      @stream.should_not allow_values_for :dummy
+      @stream.should_not allow_values_for :format, :dummy
     end
 
     it "should transforme the given format into a symbol" do

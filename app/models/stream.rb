@@ -7,11 +7,13 @@ class Stream < ActiveForm::Base
   attr_accessor :name, :id, :description, :genre, :related_url, :enabled
   validates_presence_of :name
 
-  attr_accessor :server, :password, :mount_point
+  attr_accessor :server, :server_type, :password, :mount_point
   acts_as_ip_port :port
-  validates_presence_of :server, :port, :mount_point, :password
+  validates_presence_of :server, :server_type, :port, :password
+  validates_presence_of :mount_point, :if => :icecast_server?
+  validates_inclusion_of :server_type, :in => [ :icecast2, :shoutcast ]
 
-  validates_format_of :mount_point, :with => %r{^[^/]}
+  validates_format_of :mount_point, :with => %r{^[^/]}, :allow_blank => true
 
   attr_accessor :format
   validates_presence_of :format
@@ -26,6 +28,7 @@ class Stream < ActiveForm::Base
   def after_initialize
     self.format ||= :vorbis
     self.quality ||= 4
+    self.server_type ||= :icecast2
     self.enabled = true if self.enabled.nil?
 
     if new_record?
@@ -55,6 +58,14 @@ class Stream < ActiveForm::Base
 
   def path
     mount_point and mount_point.start_with?('/') ? mount_point : "/#{mount_point}"
+  end
+
+  def server_type=(server_type)
+    @server_type = server_type ? server_type.to_sym : nil
+  end
+
+  def icecast_server?
+    server_type == :icecast2
   end
 
   def format=(format)

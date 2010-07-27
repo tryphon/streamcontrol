@@ -7,6 +7,7 @@ fr:
         genre: Genre
         related_url: URL associée
         server: Serveur
+        server_type: Type de serveur
         mount_point: Point de montage
         password: Mot de passe
         quality: Qualité

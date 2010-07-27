@@ -6,6 +6,11 @@
 <h3><%= t(".server_attributes") %></h3>
 
 <p>
+  <%= form.label :server_type, Stream.human_attribute_name("server_type") %><br/>
+  <%= form.select :server_type, options_for_select([:icecast2, :shoutcast], @stream.server_type) %>
+</p>
+
+<p>
   <%= form.label :server, Stream.human_attribute_name("server") %><br/>
   <%= form.text_field :server %>
 </p>

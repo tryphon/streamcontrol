@@ -2,6 +2,12 @@
 
 <div class="stream description <%= @stream.presenter.status_class %>">
   <h3><%= t(".server_attributes") %></h3>
+
+  <p>
+    <%= Stream.human_attribute_name("server_type") %> :
+    <%= @stream.server_type %>
+  </p>
+
   <p>
     <%= Stream.human_attribute_name("server") %> :
     <%= @stream.server %>
@@ -12,10 +18,12 @@
     <%= @stream.port %>
   </p>
 
-  <p>
-    <%= Stream.human_attribute_name("mount_point") %> :
-    <%= @stream.mount_point %>
-  </p>
+  <% if @stream.icecast_server? %>
+    <p>
+      <%= Stream.human_attribute_name("mount_point") %> :
+      <%= @stream.mount_point %>
+    </p>
+  <% end %>
 
   <p>
     <%= Stream.human_attribute_name("password") %> :
