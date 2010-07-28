@@ -1,9 +1,9 @@
 source :gemcutter
 
-gem "rails", "2.3.5"
+gem "rails", "2.3.8"
 gem "rack", "1.0.1"
 
-gem "inherited_resources", "= 1.0.3"
+gem "inherited_resources", "= 1.0.6"
 gem "will_paginate", "~> 2.3.11"
 gem "SyslogLogger"
 gem "delayed_job"
