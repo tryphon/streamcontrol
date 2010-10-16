@@ -1,9 +1,16 @@
 Then /^I should see an event "([^\"]*)"$/ do |message|
   visit "/events"
-  response.should contain(message)
+  page.should have_content(message)
+end
+
+Then /^I should see events:$/ do |table|
+  visit "/events"
+  table.raw.each do |message|
+    page.should have_content(message)
+  end
 end
 
 Then /^I should not see an event "([^\"]*)"$/ do |message|
   visit "/events"
-  response.should_not contain(message)
+  page.should_not have_content(message)
 end

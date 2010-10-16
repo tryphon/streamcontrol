@@ -1,3 +1,4 @@
+@darkice
 Feature: Monitor darkice source
   In order to configure its stream
   An user
@@ -10,9 +11,10 @@ Feature: Monitor darkice source
   Scenario: Partial or invalid configuration
   Given no stream is configured in darkice
   When darkice starts
-  Then I should see an event "Configuration partielle"
-  And I should not see an event "Source démarrée"
-  And I should not see an event "Source stoppée"
+  Then I should see events:
+  | Configuration partielle |
+  | Source démarrée         |
+  | Source stoppée          |
 
   Scenario: Invalid password in vorbis
   Given the stream server refuses authentication

@@ -4,6 +4,10 @@ begin
   include Debian::Build
   require 'debian/build/config'
 
+  Platform.repositories << Proc.new do |platform| 
+    "deb http://debian.tryphon.eu lenny-backports main contrib" if platform.distribution.to_s == "stable"
+  end
+
   namespace "package" do
     Package.new(:streamcontrol) do |t|
       t.version = '0.7'

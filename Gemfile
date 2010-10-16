@@ -10,9 +10,20 @@ gem "delayed_job"
 
 group :development do
   gem "sqlite3-ruby"
+  gem "ZenTest"
 end
 
 group :test do
-  gem 'rspec-rails', '>= 1.3.2'
+  gem 'rspec-rails'
   gem 'remarkable_rails'
+end
+
+group :cucumber do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'cucumber-rails'
+  gem 'cucumber'
+  gem 'rspec-rails'
+  gem 'pickle'
+  gem 'factory_girl'
 end

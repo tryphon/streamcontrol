@@ -9,3 +9,4 @@ rerun.txt
 config.rb
 config/database.yml
 spec.html
+capybara-*.html

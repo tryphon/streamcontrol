@@ -2,7 +2,7 @@ Autotest.add_hook :initialize do |autotest|
   %w{bin coverage log script tasks tests \.git db rerun.txt tmp}.each do |directory|
     autotest.add_exception(%r{^\./#{directory}})
   end
-  autotest.add_exception(%r{webrat-[0-9]*.html})
+  autotest.add_exception(%r{(webrat|capybara)-[0-9]*.html})
 
   autotest.add_mapping(%r%^spec/presenters/.*rb$%) do |filename, _|
     filename

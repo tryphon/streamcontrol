@@ -12,8 +12,6 @@ def darkice_config
   end
 end
 
-
-
 def darkice_process
   @darkice_process ||= Darkice::Process.new(:config_file => darkice_config.write.file, :logger => Rails.logger)
 end
