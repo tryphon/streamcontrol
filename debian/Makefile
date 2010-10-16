@@ -3,6 +3,7 @@ PATH := ${HOME}/.gem/ruby/1.8/bin:${HOME}/.bundle/ruby/1.8/bin:${PATH}
 build:
 	gem install --no-rdoc --no-ri --user-install bundler
 	bundle install vendor --without=test --without=development
+	ln -s bundle/ruby/1.8/gems vendor/gems
 
 	cp config/database.yml.sample config/database.yml
 	bundle exec rake rails:freeze:gems 
