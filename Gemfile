@@ -26,4 +26,7 @@ group :cucumber do
   gem 'rspec-rails'
   gem 'pickle'
   gem 'factory_girl'
+
+  # used by features/support/mock_icecast2.rb
+  gem 'eventmachine'
 end
