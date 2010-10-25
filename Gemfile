@@ -14,7 +14,8 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails'
+  gem 'rspec', '< 2.0'
+  gem 'rspec-rails', '< 2.0'
   gem 'remarkable_rails'
 end
 
@@ -23,7 +24,7 @@ group :cucumber do
   gem 'database_cleaner'
   gem 'cucumber-rails'
   gem 'cucumber'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '< 2.0'
   gem 'pickle'
   gem 'factory_girl'
 

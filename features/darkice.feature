@@ -13,8 +13,6 @@ Feature: Monitor darkice source
   When darkice starts
   Then I should see events:
   | Configuration partielle |
-  | Source démarrée         |
-  | Source stoppée          |
 
   Scenario: Invalid password in vorbis
   Given the stream server refuses authentication
