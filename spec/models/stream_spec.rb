@@ -92,7 +92,7 @@ describe Stream do
     it { should validate_presence_of :format }
     
     it "should support :vorbis, :mp3 and :aac" do
-      subject.should allow_values_for :format, :vorbis, :mp3, :aac
+      subject.should allow_values_for :format, :vorbis, :mp3, :aac, :aacp
       subject.should_not allow_values_for :format, :dummy
     end
 
@@ -103,18 +103,93 @@ describe Stream do
 
   end
 
-  describe "quality" do
+  describe "#requires_quality? " do
 
-    it { should validate_presence_of :quality }
-
-    it "should accept quality between 0 and 10" do
-      subject.should allow_values_for :quality, *(0..10).to_a
-      subject.should_not allow_values_for :quality, -1, 11
+    def require_quality
+      simple_matcher("requires quality") do |stream|
+        stream.requires_quality?
+      end
     end
 
-    it "should transforme the given quality into an integer" do
-      subject.quality = "5"
-      subject.quality.should == 5
+    # For rspec 2
+    # RSpec::Matchers.define :require_quality do
+    #   match do |stream|
+    #     stream.require_quality?
+    #   end
+    # end
+    
+    it "should be false when format is aacp" do
+      subject.format = :aacp
+      subject.should_not require_quality
+    end
+
+    it "should be true when format isn't aacp" do
+      subject.format = :other
+      subject.should require_quality
+    end
+
+  end
+
+  describe "quality" do
+
+    context "when the format requires quality" do
+      before(:each) do
+        subject.format = :vorbis
+      end
+
+      it { should validate_presence_of :quality }
+
+      it "should accept quality between 0 and 10" do
+        subject.should allow_values_for :quality, *(0..10).to_a
+        subject.should_not allow_values_for :quality, -1, 11
+      end
+
+      it "should transforme the given quality into an integer" do
+        subject.quality = "5"
+        subject.quality.should == 5
+      end
+    end
+
+    context "when the format doesn't require quality" do
+
+      before(:each) do
+        subject.format = :aacp
+      end
+
+      it { should_not validate_presence_of :quality }
+
+    end
+
+  end
+
+  describe "bitrate" do
+
+    context "when the format requires bitrate" do
+      before(:each) do
+        subject.stub :requires_bitrate? => true
+      end
+
+      it { should validate_presence_of :bitrate }
+
+      it "should accept bitrate in 32, 48, 64 (for the moment)" do
+        subject.should allow_values_for :bitrate, 32, 48, 64
+        subject.should_not allow_values_for :bitrate, 0, 72, 128
+      end
+
+      it "should transforme the given bitrate into an integer" do
+        subject.bitrate = "32"
+        subject.bitrate.should == 32
+      end
+    end
+
+    context "when the format doesn't require bitrate" do
+
+      before(:each) do
+        subject.stub :requires_bitrate? => false
+      end
+
+      it { should_not validate_presence_of :bitrate }
+
     end
 
   end

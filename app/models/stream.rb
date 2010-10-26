@@ -15,13 +15,28 @@ class Stream < ActiveForm::Base
 
   validates_format_of :mount_point, :with => %r{^[^/]}, :allow_blank => true
 
+  @@available_formats = [ :vorbis, :mp3, :aac, :aacp ]
+  cattr_reader :available_formats
+
   attr_accessor :format
   validates_presence_of :format
-  validates_inclusion_of :format, :in => [ :vorbis, :mp3, :aac ]
+  validates_inclusion_of :format, :in => available_formats
 
   attr_accessor :quality
-  validates_presence_of :quality
   validates_numericality_of :quality, :only_integer => true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 10
+  with_options :if => :requires_quality? do |when_requires_quality|
+    when_requires_quality.validates_presence_of :quality
+  end
+
+  @@available_bitrates = [ 32, 48, 64 ]
+  cattr_reader :available_bitrates
+
+  attr_accessor :bitrate
+  validates_inclusion_of :bitrate, :in => available_bitrates
+
+  with_options :if => :requires_bitrate? do |when_requires_bitrate|
+    when_requires_bitrate.validates_presence_of :bitrate
+  end
 
   validates_host :server
 
@@ -34,6 +49,26 @@ class Stream < ActiveForm::Base
     if new_record?
       self.attributes = Stream.default_attributes.update(self.attributes)
     end
+  end
+
+  def self.requires_cbr?(format)
+    format == :aacp
+  end
+  
+  def self.requires_quality?(format)
+    not requires_cbr? format
+  end
+
+  def self.requires_bitrate?(format)
+    requires_cbr? format
+  end
+
+  def requires_quality?
+    self.class.requires_quality?(self.format)
+  end
+
+  def requires_bitrate?
+    self.class.requires_bitrate?(self.format)
   end
 
   def self.default_attributes
@@ -74,6 +109,10 @@ class Stream < ActiveForm::Base
 
   def quality=(quality)
     @quality = quality ? quality.to_i : nil
+  end
+
+  def bitrate=(bitrate)
+    @bitrate = bitrate ? bitrate.to_i : nil
   end
 
   def mount_point=(mount_point)

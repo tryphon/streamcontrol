@@ -37,10 +37,19 @@
     <%= @stream.presenter.format.name %>
   </p>
 
+  <% if @stream.requires_quality? %>
   <p>
     <%= Stream.human_attribute_name("quality") %> :
     <%= @stream.quality %>
   </p>
+  <% end %>
+
+  <% if @stream.requires_bitrate? %>
+  <p>
+    <%= Stream.human_attribute_name("bitrate") %> :
+    <%= @stream.bitrate %> kbs
+  </p>
+  <% end %>
 
   <h3><%= t(".description_attributes") %></h3>
   <% unless @stream.description.blank? %>

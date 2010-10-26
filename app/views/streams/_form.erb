@@ -42,6 +42,11 @@
   <%= form.collection_select :quality, 0..10, :to_i, :to_s %>
 </p>
 
+<p>
+  <%= form.label :bitrate, Stream.human_attribute_name("bitrate") %><br/>
+  <%= form.collection_select :bitrate, Stream.available_bitrates, :to_i, :to_s %> kbs
+</p>
+
 <h3><%= t(".description_attributes") %></h3>
 
 <p>

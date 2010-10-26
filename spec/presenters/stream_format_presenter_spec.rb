@@ -30,8 +30,8 @@ describe StreamFormatPresenter do
 
   describe "class method all" do
     
-    it "should return StreamFormatPresenters for :vorbis, :mp3 and :aac" do
-      StreamFormatPresenter.all.collect(&:format).should == [ :vorbis, :mp3, :aac ]
+    it "should return StreamFormatPresenters for #{Stream.available_formats.join(', ')}" do
+      StreamFormatPresenter.all.collect(&:format).should == Stream.available_formats
     end
 
   end

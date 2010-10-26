@@ -5,7 +5,7 @@ describe StreamsHelper do
   describe "format_radio_buttons" do
 
     before(:each) do
-      @format_presenter = mock StreamFormatPresenter, :format => "dummy", :name => "Dummy", :wikipedia_url => "http://wikipedia/Dummy"
+      @format_presenter = mock StreamFormatPresenter, :format => "dummy", :name => "Dummy", :wikipedia_url => "http://wikipedia/Dummy", :requires_birate? => false, :requires_quality? => true
       StreamFormatPresenter.stub!(:all).and_return([ @format_presenter ])
       
       @form_builder = mock(ActionView::Helpers::FormBuilder, :radio_button => '<input type="radio"/>', :label => '<label/>')
@@ -21,7 +21,7 @@ describe StreamsHelper do
     end
 
     it "should display a radio button to select format" do
-      @form_builder.should_receive(:radio_button).with(:format, "dummy").and_return('<input type="radio"/>')
+      @form_builder.should_receive(:radio_button).with(:format, "dummy", {:"data-requires-bitrate" => false, :"data-requires-quality" => true}).and_return('<input type="radio"/>')
       helper.format_radio_buttons(@form_builder).should have_tag("input[type=radio]")
     end
 
