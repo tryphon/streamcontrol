@@ -4,6 +4,9 @@ Feature: Monitor darkice source
   An user
   wants to have a concrete feedback on darkice activity
 
+  Background:
+    Given an Accept Language header with "fr"
+
   Scenario: Normal startup
   When darkice starts
   Then I should see an event "Source démarrée"
