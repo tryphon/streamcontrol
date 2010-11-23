@@ -5,6 +5,7 @@ Feature: Manage releases
 
   Background:
     Given the current release is "release-4"
+    And an Accept Language header with "fr"
   
   Scenario: Check release without update
     Given the latest release is "release-3"
