@@ -38,7 +38,7 @@ GEM
     culerity (0.2.12)
     daemons (1.1.0)
     database_cleaner (0.5.2)
-    delayed_job (2.0.3)
+    delayed_job (2.0.4)
       daemons
     diff-lcs (1.1.2)
     eventmachine (0.12.10)
@@ -116,7 +116,7 @@ DEPENDENCIES
   cucumber
   cucumber-rails
   database_cleaner
-  delayed_job
+  delayed_job (= 2.0.4)
   eventmachine
   factory_girl
   inherited_resources (= 1.0.6)
