@@ -1,9 +1,8 @@
 set :application, "streamcontrol"
 
-set :repository,  "git://projects.tryphon.eu/streamcontrol"
+set :repository,  "git://www.dbx.tryphon.priv/streamcontrol"
 set :scm, :git
 set :git_enable_submodules, true
-set :deploy_via, :copy
 
 set :deploy_to, "/var/www/streamcontrol"
 
@@ -11,7 +10,7 @@ server "radio.dbx.tryphon.priv", :app, :web, :db, :primary => true
 
 # after "deploy:setup", "db:create"
 
-set :keep_releases, 10
+set :keep_releases, 5
 after "deploy:update", "deploy:cleanup" 
 set :use_sudo, false
 
