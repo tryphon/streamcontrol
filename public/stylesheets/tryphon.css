@@ -18,6 +18,7 @@ img {
   vertical-align: middle;
 }
 strong { font-weight: bold; }
+em { font-style: italic; }
 #access { display: none; }
 #header {
   border-bottom: 4px solid #cccccc;
