@@ -207,4 +207,13 @@ class Stream < ActiveForm::Base
     all.last
   end
 
+  def metadata_updater
+    attributes = { :server => server, :port => port, :password => password }
+    if icecast_server?
+      Metalive::Icecast.new attributes.update(:mount => mount_point)
+    else
+      Metalive::Shoutcast.new attributes.update(:port => port-1)
+    end
+  end
+
 end

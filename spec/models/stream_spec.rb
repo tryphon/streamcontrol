@@ -458,4 +458,38 @@ describe Stream do
 
   end
 
+  describe "metadata_updater" do
+
+    subject { stream.metadata_updater }
+    
+    context "for icecast stream" do
+
+      let(:stream) { Stream.new :server_type => :icecast2, :server => "server", :port => 9000, :password => "secret", :mount_point => "test.ogg" }
+
+      its(:server) { should == stream.server }
+      its(:port) { should == stream.port }
+      its(:password) { should == stream.password }
+      its(:mount) { should == "/#{stream.mount_point}" }
+
+      it { should be_instance_of(Metalive::Icecast) }
+
+    end
+
+    context "for shoutcast stream" do
+
+      let(:stream) { Stream.new :server_type => :shoutcast, :server => "server", :port => 9000, :password => "secret" }
+
+      its(:server) { should == stream.server }
+      its(:password) { should == stream.password }
+
+      it "should use the admin port (stream port - 1)" do
+        subject.port.should == stream.port - 1
+      end
+
+      it { should be_instance_of(Metalive::Shoutcast) }
+
+    end
+
+  end
+
 end

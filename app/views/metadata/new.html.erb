@@ -1,0 +1,15 @@
+<%= title_tag t(".title") %>
+
+<% form_for @metadata, :url => metadata_path do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :song, Metadata.human_attribute_name("song") %><br/>
+    <%= f.text_field :song %>
+  </p>
+
+  <p>
+    <%= f.submit t(".submit") %> 
+    <%= t("or") %> <%= link_to "#{t(".cancel")} &#8250;", root_path %>
+  </p>
+<% end %>

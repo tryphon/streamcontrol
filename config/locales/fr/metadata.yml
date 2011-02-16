@@ -1,0 +1,10 @@
+fr:
+  metadata:
+    new:
+      title: Modifier la description des flux
+      submit: Modifier
+      cancel: revenir
+  activerecord:
+    attributes:
+      metadata:
+        song: Titre
