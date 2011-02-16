@@ -1,8 +1,12 @@
 class MetadataController < InheritedResources::Base
   defaults :resource_class => Metadata, :instance_name => "metadata"
 
-  actions :new, :create
+  actions :new, :create, :show
   respond_to :html, :xml, :json
+
+  def show
+    redirect_to new_metadata_path
+  end
 
   def create
     create! do |success, failure|
