@@ -10,4 +10,9 @@ class MetadataController < InheritedResources::Base
     end
   end
 
+  private
+
+  # :metadatas_url is used by InheritedResources #api_behavior
+  alias_method :metadatas_url, :new_metadata_url
+
 end
