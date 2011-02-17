@@ -80,6 +80,7 @@ GEM
       activesupport (= 2.3.8)
       rake (>= 0.8.3)
     rake (0.8.7)
+    rake-debian-build (1.0.16)
     rcov (0.9.9)
     remarkable (3.1.13)
       rspec (>= 1.2.0)
@@ -129,6 +130,7 @@ DEPENDENCIES
   pickle
   rack (~> 1.1.0)
   rails (= 2.3.8)
+  rake-debian-build
   rcov
   remarkable_rails
   rspec (< 2.0)

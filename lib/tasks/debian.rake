@@ -10,7 +10,7 @@ begin
 
   namespace "package" do
     Package.new(:streamcontrol) do |t|
-      t.version = '0.11'
+      t.version = '0.12'
       t.debian_increment = 1
 
       t.source_provider = GitExportProvider.new do |source_directory|

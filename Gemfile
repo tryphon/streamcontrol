@@ -12,6 +12,7 @@ gem "metalive", "0.0.1"
 group :development do
   gem "sqlite3-ruby"
   gem "ZenTest"
+  gem "rake-debian-build"
 end
 
 group :test do
