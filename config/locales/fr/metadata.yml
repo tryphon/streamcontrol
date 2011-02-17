@@ -8,3 +8,5 @@ fr:
     attributes:
       metadata:
         song: Titre
+    models:
+      metadata: Description
