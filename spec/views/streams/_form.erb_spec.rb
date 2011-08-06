@@ -8,6 +8,7 @@ describe "/streams/_form" do
     @form_builder = stub :text_field => '<input type="text"/>', :label => '<label/>', :collection_select => "<select/>", :check_box => '<input type="checkbox"/>', :select => '<select/>'
 
     template.stub!(:format_radio_buttons)
+    template.stub!(:mode_radio_buttons)
   end
 
   def render_view

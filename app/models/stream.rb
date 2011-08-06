@@ -29,7 +29,7 @@ class Stream < ActiveForm::Base
 
   attr_accessor :quality
   validates_numericality_of :quality, :only_integer => true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 10
-  with_options :if => :requires_quality? do |when_requires_quality|
+  with_options :if => Proc.new { |s| s.allows_vbr? and s.mode == :vbr } do |when_requires_quality|
     when_requires_quality.validates_presence_of :quality
   end
 
@@ -39,7 +39,7 @@ class Stream < ActiveForm::Base
   attr_accessor :bitrate
   validates_inclusion_of :bitrate, :in => available_bitrates
 
-  with_options :if => :requires_bitrate? do |when_requires_bitrate|
+  with_options :if => Proc.new { |s| s.allows_cbr? and s.mode == :cbr } do |when_requires_bitrate|
     when_requires_bitrate.validates_presence_of :bitrate
   end
 

@@ -47,6 +47,7 @@ describe Stream do
 
     its(:format) { should == :vorbis }
     its(:quality) { should == 4 }
+    its(:mode) { should == :vbr }
     it { should be_enabled }
     its(:server_type) { should == :icecast2 }
     
@@ -96,7 +97,7 @@ describe Stream do
       subject.should_not allow_values_for :format, :dummy
     end
 
-    it "should transforme the given format into a symbol" do
+    it "should transform the given format into a symbol" do
       subject.format = "vorbis"
       subject.format.should == :vorbis
     end
@@ -105,9 +106,9 @@ describe Stream do
 
   describe "#requires_quality? " do
 
-    def require_quality
-      simple_matcher("requires quality") do |stream|
-        stream.requires_quality?
+    def allow_vbr
+      simple_matcher("allows vbr") do |stream|
+        stream.allows_vbr?
       end
     end
 
@@ -120,19 +121,14 @@ describe Stream do
     
     it "should be false when format is aacp" do
       subject.format = :aacp
-      subject.should_not require_quality
-    end
-
-    it "should be true when format isn't aacp" do
-      subject.format = :other
-      subject.should require_quality
+      subject.should_not allow_vbr
     end
 
   end
 
   describe "quality" do
 
-    context "when the format requires quality" do
+    context "when the format allows quality" do
       before(:each) do
         subject.format = :vorbis
       end
@@ -150,7 +146,7 @@ describe Stream do
       end
     end
 
-    context "when the format doesn't require quality" do
+    context "when the format doesn't allow quality" do
 
       before(:each) do
         subject.format = :aacp
@@ -164,16 +160,17 @@ describe Stream do
 
   describe "bitrate" do
 
-    context "when the format requires bitrate" do
+    context "when the format allows cbr" do
       before(:each) do
-        subject.stub :requires_bitrate? => true
+        subject.stub :allows_cbr? => true
+        subject.mode = :cbr
       end
 
       it { should validate_presence_of :bitrate }
 
       it "should accept bitrate in 32, 48, 64 (for the moment)" do
-        subject.should allow_values_for :bitrate, 32, 48, 64
-        subject.should_not allow_values_for :bitrate, 0, 72, 128
+        subject.should allow_values_for :bitrate, 8, 16, 24, 32, 40, 48, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320
+        subject.should_not allow_values_for :bitrate, 0, 72
       end
 
       it "should transforme the given bitrate into an integer" do
@@ -182,10 +179,10 @@ describe Stream do
       end
     end
 
-    context "when the format doesn't require bitrate" do
+    context "when the format doesn't allow cbr" do
 
       before(:each) do
-        subject.stub :requires_bitrate? => false
+        subject.stub :allows_cbr? => false
       end
 
       it { should_not validate_presence_of :bitrate }
