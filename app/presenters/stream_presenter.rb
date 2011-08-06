@@ -8,6 +8,10 @@ class StreamPresenter
     StreamFormatPresenter.find(@stream.format)
   end
 
+  def mode
+    StreamModePresenter.find(@stream.mode)
+  end
+
   def status_class
     @stream.enabled? ? "enabled" : "disabled"
   end

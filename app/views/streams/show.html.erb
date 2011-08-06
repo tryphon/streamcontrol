@@ -34,7 +34,8 @@
 
   <p>
     <%= Stream.human_attribute_name("format") %> :
-    <%= @stream.presenter.format.name %>
+    <%= @stream.presenter.format.name %>, <%= @stream.presenter.mode.name %>,
+    <%= @stream.mode == :cbr ? "#{@stream.bitrate} kbps" : "qualité : #{@stream.quality}" %>
   </p>
 
   <% if @stream.requires_quality? %>

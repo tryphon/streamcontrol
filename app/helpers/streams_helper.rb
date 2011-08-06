@@ -2,8 +2,8 @@ module StreamsHelper
 
   def format_radio_button(form, format_presenter)
     data_attributes = {
-      :"data-requires-bitrate" => format_presenter.requires_birate?, 
-      :"data-requires-quality" => format_presenter.requires_quality?
+      :"data-allows-cbr" => format_presenter.allows_cbr?, 
+      :"data-allows-vbr" => format_presenter.allows_vbr?
     }
     form.radio_button :format, format_presenter.format, data_attributes
   end
@@ -20,5 +20,24 @@ module StreamsHelper
     end
   end
 
+  def mode_radio_button(form, mode_presenter)
+    data_attributes = {
+      :"data-allows-cbr" => mode_presenter.mode == :cbr,
+      :"data-allows-vbr" => mode_presenter.mode == :vbr
+    }
+    form.radio_button :mode, mode_presenter.mode, data_attributes
+  end
+
+  def mode_radio_buttons(form)
+    content_tag(:ul) do
+      StreamModePresenter.all.collect do |mode_presenter|
+        content_tag(:li) do
+          [ mode_radio_button(form, mode_presenter),
+            form.label("mode_#{mode_presenter.mode}", mode_presenter.name),
+            link_to(image_tag('ui/help.png', :alt => '?'), mode_presenter.wikipedia_url) ].join(" ")
+        end
+      end.join("\n")
+    end
+  end
 
 end

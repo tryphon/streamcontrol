@@ -18,12 +18,12 @@ class StreamFormatPresenter
     "http://#{I18n.locale}.wikipedia.org/wiki/#{wikipedia_page}"
   end
 
-  def requires_birate?
-    Stream.requires_bitrate?(format)
+  def allows_cbr?
+    Stream.allows_cbr?(format)
   end
 
-  def requires_quality?
-    Stream.requires_quality?(format)
+  def allows_vbr?
+    Stream.allows_vbr?(format)
   end
 
   def self.find(format)

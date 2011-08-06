@@ -38,6 +38,11 @@
 </p>
 
 <p>
+  <%= form.label :mode, Stream.human_attribute_name("mode") %><br/>
+  <%= mode_radio_buttons form %>
+</p>
+
+<p>
   <%= form.label :quality, Stream.human_attribute_name("quality") %><br/>
   <%= form.collection_select :quality, 0..10, :to_i, :to_s %>
 </p>
@@ -63,3 +68,20 @@
   <%= form.label :related_url, Stream.human_attribute_name("related_url") %><br/>
   <%= form.text_field :related_url, :size => 50 %>
 </p>
+<script type="text/javascript">
+var bitrates = <%= Stream.allowed_bitrates.to_json %>
+//myAnchor.parentNode.replaceChild(mySpan, myAnchor);
+
+function replace_bitrate_select(format)
+{
+  bitrate_select = document.getElementById("stream_bitrate");
+  options = bitrate_select.childNodes
+  bitrate_select.options.length=0;
+  bitrates[format].each(function(rate){
+    rate_opt = document.createElement('option');
+    rate_opt.text = rate;
+    rate_opt.value = rate;
+    bitrate_select.appendChild(rate_opt);
+  });
+}
+</script>

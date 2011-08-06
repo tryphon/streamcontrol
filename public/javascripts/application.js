@@ -30,18 +30,46 @@ Event.observe(window, "load", function() {
     });
   };
 
-  $$('input[name="stream[format]"]').each(function(radio) {
-    var requires_bitrate = radio.getAttribute("data-requires-bitrate") == "true";
-    var requires_quality = radio.getAttribute("data-requires-quality") == "true";
+  var toggle_stream_mode = function(attribute, enable) {
+    $$('[id="stream_mode_' + attribute + '"]').each(function(input) {
+      if (enable) {
+        console.log("show " + attribute);
+        input.up().show();
+      } else {
+        console.log("hide " + attribute);
+        input.up().hide();
+      };
+    });
+  };
+
+  $$('input[name="stream[mode]"]').each(function(radio) {
+    var allows_cbr = radio.getAttribute("data-allows-cbr") == "true";
+    var allows_vbr = radio.getAttribute("data-allows-vbr") == "true";
 
     if (radio.checked) {
-      toggle_stream_bitrate_quality("bitrate", requires_bitrate);
-      toggle_stream_bitrate_quality("quality", requires_quality);
+      toggle_stream_bitrate_quality("bitrate", allows_cbr);
+      toggle_stream_bitrate_quality("quality", allows_vbr);
     }
                                         
     Event.observe(radio, 'change', function() {
-      toggle_stream_bitrate_quality("bitrate", requires_bitrate);
-      toggle_stream_bitrate_quality("quality", requires_quality);
+      toggle_stream_bitrate_quality("bitrate", allows_cbr);
+      toggle_stream_bitrate_quality("quality", allows_vbr);
+    });
+  });
+
+  $$('input[name="stream[format]"]').each(function(radio) {
+    var allows_cbr = radio.getAttribute("data-allows-cbr") == "true";
+    var allows_vbr = radio.getAttribute("data-allows-vbr") == "true";
+
+    if (radio.checked) {
+      toggle_stream_mode("cbr", allows_cbr);
+      toggle_stream_mode("vbr", allows_vbr);
+    }
+                                        
+    Event.observe(radio, 'change', function(e) {
+      toggle_stream_mode("cbr", allows_cbr);
+      toggle_stream_mode("vbr", allows_vbr);
+      replace_bitrate_select(e.element().value);
     });
   });
 });

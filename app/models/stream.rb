@@ -16,11 +16,16 @@ class Stream < ActiveForm::Base
   validates_format_of :mount_point, :with => %r{^[^/]}, :allow_blank => true
 
   @@available_formats = [ :vorbis, :mp3, :aac, :aacp ]
+  @@available_modes = [ :vbr, :cbr ]
   cattr_reader :available_formats
 
   attr_accessor :format
   validates_presence_of :format
   validates_inclusion_of :format, :in => available_formats
+
+  attr_accessor :mode
+  validates_presence_of :mode
+  validate :validate_mode
 
   attr_accessor :quality
   validates_numericality_of :quality, :only_integer => true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 10
@@ -28,7 +33,7 @@ class Stream < ActiveForm::Base
     when_requires_quality.validates_presence_of :quality
   end
 
-  @@available_bitrates = [ 32, 48, 64 ]
+  @@available_bitrates = [ 8, 16, 24, 32, 40, 48, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320 ]
   cattr_reader :available_bitrates
 
   attr_accessor :bitrate
@@ -42,6 +47,7 @@ class Stream < ActiveForm::Base
 
   def after_initialize
     self.format ||= :vorbis
+    self.mode ||= :vbr
     self.quality ||= 4
     self.server_type ||= :icecast2
     self.enabled = true if self.enabled.nil?
@@ -55,8 +61,16 @@ class Stream < ActiveForm::Base
     format == :aacp
   end
   
+  def self.allows_cbr?(format)
+    [:vorbis, :mp3, :aac, :aacp].include? format
+  end
+
   def self.requires_quality?(format)
-    not requires_cbr? format
+    false
+  end
+
+  def self.allows_vbr?(format)
+    [:vorbis, :mp3, :aac].include? format
   end
 
   def self.requires_bitrate?(format)
@@ -69,6 +83,34 @@ class Stream < ActiveForm::Base
 
   def requires_bitrate?
     self.class.requires_bitrate?(self.format)
+  end
+
+  def allows_cbr?
+    self.class.allows_cbr?(self.format)
+  end
+
+  def allows_vbr?
+    self.class.allows_vbr?(self.format)
+  end
+
+  def self.allowed_bitrates(format = nil)
+    case format
+    when :mp3
+      [8, 16, 24, 32, 40, 48, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320]
+    when :vorbis
+      [8, 16, 24, 32, 40, 48, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320]
+    when :aac
+      [32, 48, 64]
+    when :aacp
+      [7.35, 8, 11.025, 12, 16, 22.05, 24, 32, 44.1, 48, 64, 88.2, 96]
+    when nil
+	[:mp3, :vorbis, :aac, :aacp].inject({}) do |map,format|
+          map[format] = allowed_bitrates(format)
+          map
+        end
+    else
+      []
+    end
   end
 
   def self.default_attributes
@@ -105,6 +147,10 @@ class Stream < ActiveForm::Base
 
   def format=(format)
     @format = format ? format.to_sym : nil
+  end
+
+  def mode=(mode)
+    @mode = mode ? mode.to_sym : nil
   end
 
   def quality=(quality)
@@ -213,6 +259,14 @@ class Stream < ActiveForm::Base
       Metalive::Icecast.new attributes.update(:mount => mount_point)
     else
       Metalive::Shoutcast.new attributes.update(:port => port-1)
+    end
+  end
+
+  private
+
+  def validate_mode
+    unless send("allows_#{mode}?")
+      errors.add(:mode, :not_available)
     end
   end
 
