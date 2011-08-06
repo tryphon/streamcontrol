@@ -9,7 +9,8 @@
     URL: <%= stream.url %>
   </p>
   <p>
-    Format: <%= stream.presenter.format.name %>, <%= Stream.human_attribute_name("quality") %> <%= stream.quality %>
+    Format: <%= stream.presenter.format.name %>, <%= stream.presenter.mode.name %>,
+    <%= stream.mode == :cbr ? "#{stream.bitrate} kbps" : "qualité : #{stream.quality}" %>
   </p>
 </div>
 
