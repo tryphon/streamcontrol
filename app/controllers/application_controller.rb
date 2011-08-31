@@ -8,4 +8,7 @@ class ApplicationController < ActionController::Base
 
   include UserInterface::LocaleManagement
   include UserInterface::UserSessionManagement
+
+  include ErrorTemplate
+
 end
