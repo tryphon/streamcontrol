@@ -33,11 +33,12 @@ class Stream < ActiveForm::Base
     when_requires_quality.validates_presence_of :quality
   end
 
-  @@available_bitrates = [ 8, 16, 24, 32, 40, 48, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320 ]
-  cattr_reader :available_bitrates
-
   attr_accessor :bitrate
-  validates_inclusion_of :bitrate, :in => available_bitrates
+  validate :bitrate_is_available
+
+  def bitrate_is_available
+    errors.add(:bitrate, :inclusion) unless allowed_bitrates.include?(bitrate)
+  end
 
   with_options :if => Proc.new { |s| s.allows_cbr? and s.mode == :cbr } do |when_requires_bitrate|
     when_requires_bitrate.validates_presence_of :bitrate
@@ -93,21 +94,25 @@ class Stream < ActiveForm::Base
     self.class.allows_vbr?(self.format)
   end
 
+  def allowed_bitrates
+    self.class.allowed_bitrates(format)
+  end
+
   def self.allowed_bitrates(format = nil)
     case format
     when :mp3
-      [8, 16, 24, 32, 40, 48, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320]
+      [32, 40, 48, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320]
     when :vorbis
-      [8, 16, 24, 32, 40, 48, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320]
+      [48, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320]
     when :aac
-      [32, 48, 64]
+      [8, 16, 24, 32, 40, 48, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320 ]
     when :aacp
-      [7.35, 8, 11.025, 12, 16, 22.05, 24, 32, 44.1, 48, 64, 88.2, 96]
+      [16, 22, 24, 32, 44, 48, 64, 72, 96]
     when nil
-	[:mp3, :vorbis, :aac, :aacp].inject({}) do |map,format|
-          map[format] = allowed_bitrates(format)
-          map
-        end
+      [:mp3, :vorbis, :aac, :aacp].inject({}) do |map,format|
+        map[format] = allowed_bitrates(format)
+        map
+      end
     else
       []
     end

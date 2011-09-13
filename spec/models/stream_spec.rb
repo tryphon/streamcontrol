@@ -168,9 +168,10 @@ describe Stream do
 
       it { should validate_presence_of :bitrate }
 
-      it "should accept bitrate in 32, 48, 64 (for the moment)" do
-        subject.should allow_values_for :bitrate, 8, 16, 24, 32, 40, 48, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320
-        subject.should_not allow_values_for :bitrate, 0, 72
+      it "should accept bitrate in #allowed_birates" do
+        subject.stub :allowed_bitrates => [42]
+        subject.should allow_values_for :bitrate, 42
+        subject.should_not allow_values_for :bitrate, 128
       end
 
       it "should transforme the given bitrate into an integer" do
