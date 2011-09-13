@@ -49,7 +49,7 @@
 
 <p>
   <%= form.label :bitrate, Stream.human_attribute_name("bitrate") %><br/>
-  <%= form.collection_select :bitrate, Stream.available_bitrates, :to_i, :to_s %> kbs
+  <%= form.collection_select :bitrate, @stream.allowed_bitrates, :to_i, :to_s %> kbs
 </p>
 
 <h3><%= t(".description_attributes") %></h3>
@@ -68,13 +68,14 @@
   <%= form.label :related_url, Stream.human_attribute_name("related_url") %><br/>
   <%= form.text_field :related_url, :size => 50 %>
 </p>
+
 <script type="text/javascript">
 var bitrates = <%= Stream.allowed_bitrates.to_json %>
-//myAnchor.parentNode.replaceChild(mySpan, myAnchor);
 
 function replace_bitrate_select(format)
 {
   bitrate_select = document.getElementById("stream_bitrate");
+  current_value = bitrate_select.value;
   options = bitrate_select.childNodes
   bitrate_select.options.length=0;
   bitrates[format].each(function(rate){
@@ -83,5 +84,7 @@ function replace_bitrate_select(format)
     rate_opt.value = rate;
     bitrate_select.appendChild(rate_opt);
   });
+  // restore previous value if possible
+  bitrate_select.value = current_value;
 }
 </script>
