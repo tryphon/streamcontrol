@@ -5,6 +5,14 @@ RAILS_ROOT = "#{File.dirname(__FILE__)}/.." unless defined?(RAILS_ROOT)
 
 require 'thread'
 
+require 'rubygems'
+begin
+  require "bundler"
+  Bundler.setup
+rescue Exception => e
+  puts "WARNING: Bundler isn't available (#{e.to_s})"
+end
+
 module Rails
   class << self
     def boot!
