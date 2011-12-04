@@ -1,18 +1,22 @@
 set :application, "streamcontrol"
 
-set :repository,  "git://www.dbx.tryphon.priv/streamcontrol"
+set :repository,  "git://www.tryphon.priv/streamcontrol"
 set :scm, :git
 set :git_enable_submodules, true
 
 set :deploy_to, "/var/www/streamcontrol"
 
-server "radio.dbx.tryphon.priv", :app, :web, :db, :primary => true
+server "radio.dbx1.tryphon.priv", :app, :web, :db, :primary => true
 
 # after "deploy:setup", "db:create"
 
 set :keep_releases, 5
 after "deploy:update", "deploy:cleanup" 
 set :use_sudo, false
+
+default_run_options[:pty] = true
+
+set :rake, "bundle exec rake"
 
 after "deploy:update_code", "deploy:symlink_shared", "deploy:gems"
 after "deploy:migrations", "deploy:fix_db_permissions"
@@ -39,7 +43,7 @@ namespace :deploy do
 
   desc "Install gems"
   task :gems, :roles => :app do
-    sudo "rake --rakefile=#{release_path}/Rakefile gems:install RAILS_ENV=production"
+    run "cd #{release_path} && umask 022 && bundle install --path=#{shared_path}/bundle --without=development:test:cucumber"
   end
 
   desc "Fix database file permissions"
