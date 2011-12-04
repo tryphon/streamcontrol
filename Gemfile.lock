@@ -15,6 +15,14 @@ GEM
       activesupport (= 2.3.8)
     activesupport (2.3.8)
     builder (2.1.2)
+    capistrano (2.6.0)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
+    capistrano-ext (1.2.1)
+      capistrano (>= 1.0.0)
     capybara (0.4.0)
       celerity (>= 0.7.9)
       culerity (>= 0.2.4)
@@ -62,6 +70,7 @@ GEM
     guard-rspec (0.3.1)
       guard (>= 0.2.2)
     has_scope (0.5.0)
+    highline (1.6.1)
     hoe (2.6.2)
       rake (>= 0.8.7)
       rubyforge (>= 2.0.4)
@@ -79,6 +88,13 @@ GEM
     metalive (0.0.1)
       httparty (= 0.6.1)
     mime-types (1.16)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-sftp (2.0.5)
+      net-ssh (>= 2.0.9)
+    net-ssh (2.1.4)
+    net-ssh-gateway (1.1.0)
+      net-ssh (>= 1.99.1)
     nokogiri (1.4.3.1)
     open_gem (1.4.2)
       launchy (~> 0.3.5)
@@ -137,6 +153,8 @@ PLATFORMS
 DEPENDENCIES
   SyslogLogger
   ZenTest
+  capistrano
+  capistrano-ext
   capybara
   cucumber
   cucumber-rails

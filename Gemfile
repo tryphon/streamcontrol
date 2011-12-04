@@ -18,6 +18,8 @@ group :development do
   gem 'guard-bundler'
   gem 'guard-cucumber'
   gem 'libnotify' if RUBY_PLATFORM =~ /linux/
+  gem 'capistrano'
+  gem 'capistrano-ext'
 end
 
 group :test do
