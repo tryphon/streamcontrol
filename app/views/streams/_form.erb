@@ -7,7 +7,7 @@
 
 <p>
   <%= form.label :server_type, Stream.human_attribute_name("server_type") %><br/>
-  <%= form.select :server_type, options_for_select([:icecast2, :shoutcast], @stream.server_type) %>
+  <%= form.select :server_type, options_for_select([["Icecast2",:icecast2],["Shoutcast DNAS",:shoutcast],["Diffusion locale",:local],["Tryphon Streaming",:tryphon_stream]], @stream.server_type) %>
 </p>
 
 <p>

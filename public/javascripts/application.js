@@ -10,12 +10,49 @@ Event.observe(window, "load", function() {
     });
   };
 
+  var toggle_stream_server= function(enable) {
+    $$('input[name="stream[server]"]').each(function(input) {
+      if (enable) {
+        input.enable();
+      } else {
+        input.disable();
+      };
+    });
+  };
+
+  var toggle_stream_port= function(enable) {
+    $$('input[name="stream[port]"]').each(function(input) {
+      if (enable) {
+        input.enable();
+      } else {
+        input.disable();
+      };
+    });
+  };
+
+  var toggle_stream_password= function(enable) {
+    $$('input[name="stream[password]"]').each(function(input) {
+      if (enable) {
+        input.enable();
+      } else {
+        input.disable();
+      };
+    });
+  };
+
   $$('select[name="stream[server_type]"]').each(function(select) {
     toggle_stream_mount_point(select.value != "shoutcast");
+    toggle_stream_password(select.value != "local");
+    toggle_stream_port(select.value != "local");
+    toggle_stream_server(select.value != "local");
     Event.observe(select, 'change', function() {
       toggle_stream_mount_point(select.value != "shoutcast");
+      toggle_stream_password(select.value != "local");
+      toggle_stream_port(select.value != "local");
+      toggle_stream_server(select.value != "local");
     });
   });
+
 
   // Disable Stream#mount_point in /streams/_form for shoutcast servers
   var toggle_stream_bitrate_quality = function(attribute, enable) {

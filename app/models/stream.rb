@@ -11,7 +11,7 @@ class Stream < ActiveForm::Base
   acts_as_ip_port :port
   validates_presence_of :server, :server_type, :port, :password
   validates_presence_of :mount_point, :if => :icecast_server?
-  validates_inclusion_of :server_type, :in => [ :icecast2, :shoutcast ]
+  validates_inclusion_of :server_type, :in => [ :icecast2, :shoutcast, :local ]
 
   validates_format_of :mount_point, :with => %r{^[^/]}, :allow_blank => true
 

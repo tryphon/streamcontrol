@@ -13,10 +13,10 @@ group :development do
   gem "sqlite3-ruby"
   gem "ZenTest"
   gem "rake-debian-build"
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'guard-bundler'
-  gem 'guard-cucumber'
+#  gem 'guard'
+#  gem 'guard-rspec'
+#  gem 'guard-bundler'
+#  gem 'guard-cucumber'
   gem 'libnotify' if RUBY_PLATFORM =~ /linux/
   gem 'capistrano'
   gem 'capistrano-ext'
