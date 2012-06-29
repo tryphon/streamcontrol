@@ -8,27 +8,33 @@
     <%= @stream.server_type %>
   </p>
 
+<% if [:icecast2, :shoutcast].include? @stream.server_type %>
   <p>
     <%= Stream.human_attribute_name("server") %> :
     <%= @stream.server %>
   </p>
+<% end %>
 
+<% if [:icecast2, :shoutcast].include? @stream.server_type %>
   <p>
     <%= Stream.human_attribute_name("port") %> :
     <%= @stream.port %>
   </p>
+<% end %>
 
-  <% if @stream.icecast_server? %>
-    <p>
-      <%= Stream.human_attribute_name("mount_point") %> :
-      <%= @stream.mount_point %>
-    </p>
-  <% end %>
+<% if [:icecast2, :local, :tryphon_stream].include? @stream.server_type %>
+  <p>
+    <%= Stream.human_attribute_name("mount_point") %> :
+    <%= @stream.mount_point %>
+  </p>
+<% end %>
 
+<% if [:icecast2, :shoutcast].include? @stream.server_type %>
   <p>
     <%= Stream.human_attribute_name("password") %> :
     <%= @stream.password %>
   </p>
+<% end %>
 
   <h3><%= t(".format_attributes") %></h3>
 
