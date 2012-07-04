@@ -13,10 +13,10 @@ group :development do
   gem "sqlite3-ruby"
   gem "ZenTest"
   gem "rake-debian-build"
-#  gem 'guard'
-#  gem 'guard-rspec'
-#  gem 'guard-bundler'
-#  gem 'guard-cucumber'
+  # gem 'guard'
+  # gem 'guard-rspec'
+  # gem 'guard-bundler'
+  # gem 'guard-cucumber'
   gem 'libnotify' if RUBY_PLATFORM =~ /linux/
   gem 'capistrano'
   gem 'capistrano-ext'
@@ -27,6 +27,9 @@ group :test do
   gem 'rspec-rails', '< 2.0'
   gem 'remarkable_rails'
   gem 'rcov'
+
+  # require to run spec:plugins
+  gem 'taglib-ruby'
 end
 
 group :cucumber do
