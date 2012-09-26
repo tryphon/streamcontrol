@@ -32,10 +32,10 @@ begin
       t.profile = 'rerun'
     end
 
-    Cucumber::Rake::Task.new({:buildbot => 'db:test:prepare'}, 'Run features that should pass in buildbot') do |t|
+    Cucumber::Rake::Task.new({:ci => 'db:test:prepare'}, 'Run features that should pass in CI') do |t|
       t.binary = vendored_cucumber_bin # If nil, the gem's binary is used.
       t.fork = true # You may get faster startup if you set this to false
-      t.profile = 'buildbot'
+      t.profile = 'ci'
     end
 
     desc 'Run all features'
