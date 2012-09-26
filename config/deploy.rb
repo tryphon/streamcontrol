@@ -1,6 +1,6 @@
 set :application, "streamcontrol"
 
-set :repository,  "git://www.tryphon.priv/streamcontrol"
+set :repository,  "git://projects.tryphon.priv/streamcontrol"
 set :scm, :git
 set :git_enable_submodules, true
 
