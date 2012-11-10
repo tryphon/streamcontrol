@@ -1,8 +1,8 @@
-streamcontrol (0.14-1) UNRELEASED; urgency=low
+streamcontrol (0.14-2) unstable; urgency=low
 
-  * New upstream release
+  * Add bundler files (closes #636)
 
- -- Alban Peignier <alban@tryphon.eu>  Sun, 04 Dec 2011 22:44:17 +0100
+ -- Alban Peignier <alban@tryphon.eu>  Wed, 07 Nov 2012 09:08:52 +0100
 
 streamcontrol (0.13-1) UNRELEASED; urgency=low
 

@@ -8,11 +8,12 @@ build:
 
 	bundle exec rake db:create db:migrate RAILS_ENV=production
 
-	rm -rf vendor/bundle/ruby/1.8/bin vendor/bundle/ruby/1.8/cache vendor/bundle/ruby/1.8/doc vendor/bundle/ruby/1.8/specifications
+	rm -rf vendor/bundle/ruby/1.8/bin vendor/bundle/ruby/1.8/cache vendor/bundle/ruby/1.8/doc
 	rm -f config/database.yml
 
 install:
 	cp -a app bin script public vendor config lib db ${DESTDIR}usr/share/streamcontrol
+	cp -a Gemfile Gemfile.lock .bundle ${DESTDIR}usr/share/streamcontrol
 	rm -f ${DESTDIR}usr/share/streamcontrol/config/environments/production.rb
 	cp debian/database.yml debian/production.rb debian/apache2.conf ${DESTDIR}etc/streamcontrol/
 	cp debian/darkice-safe ${DESTDIR}usr/bin/
