@@ -1,4 +1,4 @@
-source :gemcutter
+source 'https://rubygems.org'
 
 gem "rails", "2.3.8"
 gem "rack", "~> 1.1.0"
@@ -7,16 +7,20 @@ gem "inherited_resources", "= 1.0.6"
 gem "will_paginate", "~> 2.3.11"
 gem "SyslogLogger"
 gem "delayed_job", "= 2.0.4"
-gem "metalive", "0.0.1"
+
+# Requires to run spec:plugins
+gem "metalive"
+
+gem "tryphon-box", :git => "git://projects.tryphon.priv/box"#, :path => "~/Projects/Box"
 
 group :development do
   gem "sqlite3-ruby"
   gem "ZenTest"
   gem "rake-debian-build"
-  # gem 'guard'
-  # gem 'guard-rspec'
-  # gem 'guard-bundler'
-  # gem 'guard-cucumber'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'guard-bundler'
+  gem 'guard-cucumber'
   gem 'libnotify' if RUBY_PLATFORM =~ /linux/
   gem 'capistrano'
   gem 'capistrano-ext'

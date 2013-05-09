@@ -20,7 +20,6 @@ config.to_prepare do
   Input.current_class = TunerInput
   Monitoring.munin_resources_directory = "public/images/munin"
 
-  Release.latest_url = "public/updates/latest.yml"
-  Release.current_url = "public/current.yml"
-  Release.install_command = "/bin/true"
+  # Release.latest_url = "public/updates/latest.yml"
+  load File.expand_path("../../box.rb", __FILE__)
 end

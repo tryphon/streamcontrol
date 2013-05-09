@@ -16,6 +16,14 @@ def darkice_process
   @darkice_process ||= Darkice::Process.new(:config_file => darkice_config.write.file, :logger => Rails.logger)
 end
 
+def wait_for(limit = 5, &block)
+  time_limit = Time.now + limit
+  begin
+    sleep 0.2 
+    raise "Timeout" if Time.now > time_limit 
+  end until yield
+end
+
 Given /^no stream is configured in darkice$/ do
   darkice_config.sections.delete :"icecast2-0"
 end
@@ -30,10 +38,10 @@ end
 
 Given /^darkice is running$/ do
   Thread.new { darkice_process.run }
-  sleep 0.1 until darkice_process.running?
+  wait_for { darkice_process.running? }
 end
 
 When /^darkice is killed$/ do
   darkice_process.kill
-  sleep 0.1 while darkice_process.status != :stopped
+  wait_for { darkice_process.status != :stopped }
 end

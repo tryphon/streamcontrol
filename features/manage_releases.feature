@@ -6,7 +6,7 @@ Feature: Manage releases
   Background:
     Given the current release is "release-4"
     And an Accept Language header with "fr"
-  
+
   Scenario: Check release without update
     Given the latest release is "release-3"
     When I am on the releases page
@@ -16,6 +16,7 @@ Feature: Manage releases
     Given the latest release is "release-5"
     When I am on the releases page
     Then I should see "Mise à jour disponible"
+    # And show me the page
     And I should see a "Télécharger" link 
 
   Scenario: Download a release

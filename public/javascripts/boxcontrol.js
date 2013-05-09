@@ -38,7 +38,7 @@ ReleaseDownloadObserver = Class.create({
         this.periodical_executer();
     },
     reload_when_downloaded: function(transport) {
-        var release = transport.responseText.evalJSON().release;
+        var release = transport.responseText.evalJSON();
         if (release.status != 'download_pending') {
             this.reload_page();
         }
