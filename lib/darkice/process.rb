@@ -1,4 +1,4 @@
-require 'syslog_logger'
+require 'syslog/logger'
 
 module Darkice
   class Process
