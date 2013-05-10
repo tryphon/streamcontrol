@@ -1,4 +1,4 @@
-streamcontrol (0.15-1) UNRELEASED; urgency=low
+streamcontrol (0.15-1) unstable; urgency=low
 
   * New upstream release
 
@@ -10,80 +10,80 @@ streamcontrol (0.14-2) unstable; urgency=low
 
  -- Alban Peignier <alban@tryphon.eu>  Wed, 07 Nov 2012 09:08:52 +0100
 
-streamcontrol (0.13-1) UNRELEASED; urgency=low
+streamcontrol (0.13-1) unstable; urgency=low
 
   * New upstream release (closes #25)
 
  -- Alban Peignier <alban@tryphon.eu>  Tue, 13 Sep 2011 21:13:37 +0200
 
-streamcontrol (0.12-1) UNRELEASED; urgency=low
+streamcontrol (0.12-1) unstable; urgency=low
 
   * New upstream release (closes #20)
 
  -- Alban Peignier <alban@tryphon.eu>  Thu, 17 Feb 2011 10:00:36 +0100
 
-streamcontrol (0.11-1) UNRELEASED; urgency=low
+streamcontrol (0.11-1) unstable; urgency=low
 
   * New upstream release
 
  -- Alban Peignier <alban@tryphon.eu>  Mon, 10 Jan 2011 22:40:35 +0100
 
-streamcontrol (0.10-1) UNRELEASED; urgency=low
+streamcontrol (0.10-1) unstable; urgency=low
 
   * New upstream release (close #23)
 
  -- Alban Peignier <alban@tryphon.eu>  Sat, 18 Dec 2010 11:19:12 +0100
 
-streamcontrol (0.9-1) UNRELEASED; urgency=low
+streamcontrol (0.9-1) unstable; urgency=low
 
   * New upstream release (close #22)
 
  -- Alban Peignier <alban@tryphon.eu>  Thu, 16 Dec 2010 20:59:35 +0100
 
-streamcontrol (0.8-1) UNRELEASED; urgency=low
+streamcontrol (0.8-1) unstable; urgency=low
 
   * New upstream release (closes #19, #21)
 
  -- Alban Peignier <alban@tryphon.eu>  Thu, 28 Oct 2010 07:48:31 +0200
 
-streamcontrol (0.7-1) UNRELEASED; urgency=low
+streamcontrol (0.7-1) unstable; urgency=low
 
   * New upstream release (with disabling enhancements)
 
  -- Alban Peignier <alban@tryphon.eu>  Tue, 25 May 2010 21:18:44 +0200
 
-streamcontrol (0.6-1) UNRELEASED; urgency=low
+streamcontrol (0.6-1) unstable; urgency=low
 
   * New upstream release (with release and disabling support)
 
  -- Alban Peignier <alban@tryphon.eu>  Sat, 08 May 2010 12:09:10 +0200
 
-streamcontrol (0.5-1) UNRELEASED; urgency=low
+streamcontrol (0.5-1) unstable; urgency=low
 
   * New upstream release (with dashboard)
 
  -- Alban Peignier <alban@tryphon.eu>  Sat, 17 Apr 2010 10:20:29 +0200
 
-streamcontrol (0.4-1) UNRELEASED; urgency=low
+streamcontrol (0.4-1) unstable; urgency=low
 
   * New upstream release (with Input support)
 
  -- Alban Peignier <alban@tryphon.eu>  Sat, 10 Apr 2010 22:52:14 +0200
 
-streamcontrol (0.3-1) UNRELEASED; urgency=low
+streamcontrol (0.3-1) unstable; urgency=low
 
   * New upstream release
   * Create a link for /usr/bin/darkice-safe
 
  -- Alban Peignier <alban@tryphon.eu>  Fri, 02 Apr 2010 18:53:47 +0200
 
-streamcontrol (0.2-1) UNRELEASED; urgency=low
+streamcontrol (0.2-1) unstable; urgency=low
 
   * New upstream release
 
  -- Alban Peignier <alban@tryphon.eu>  Sat, 27 Mar 2010 19:59:35 +0100
 
-streamcontrol (0.1-1) UNRELEASED; urgency=low
+streamcontrol (0.1-1) unstable; urgency=low
 
   * Initial release.
 
