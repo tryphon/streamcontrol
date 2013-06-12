@@ -1,4 +1,4 @@
-streamcontrol (0.15-2) UNRELEASED; urgency=low
+streamcontrol (0.15-2) unstable; urgency=low
 
   * Update tryphon-box gem
 
