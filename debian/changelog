@@ -1,3 +1,9 @@
+streamcontrol (0.16-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Alban Peignier <alban@tryphon.eu>  Wed, 09 Oct 2013 20:16:57 +0200
+
 streamcontrol (0.15-2) unstable; urgency=low
 
   * Update tryphon-box gem

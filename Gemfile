@@ -11,7 +11,7 @@ gem "delayed_job", "= 2.0.4"
 # Requires to run spec:plugins
 gem "metalive"
 
-gem "tryphon-box", :git => "git://projects.tryphon.priv/box"#, :path => "~/Projects/Box"
+gem "tryphon-box", :git => "git://projects.tryphon.priv/box" #, :path => "~/Projects/Box"
 
 group :development do
   gem "sqlite3-ruby"
