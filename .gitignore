@@ -11,3 +11,5 @@ config/database.yml
 spec.html
 capybara-*.html
 build/*
+.ruby-version
+.bundle

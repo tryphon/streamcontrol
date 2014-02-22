@@ -5,7 +5,7 @@ describe Darkice::CLI do
   let(:cli) { Darkice::CLI.new }
 
   describe "default options" do
-    
+
     subject { cli.options }
 
     it { should include(:config_file => '/etc/darkice.cfg') }
@@ -13,19 +13,19 @@ describe Darkice::CLI do
 
   end
 
-  describe "parse_options" do
-
-    subject { cli }
-
-    def use_argument(argument, options = {})
+  Spec::Matchers.define :use_argument do |argument, options = {}|
+    match do |cli|
       option_name = (options[:as] or argument)
       value = "dummy"
 
-      simple_matcher("use argument #{argument} as option #{option_name}") do |actual|
-        actual.parse_options($stdout, ["--#{argument}", value])
-        actual.options[option_name] == value
-      end
+      cli.parse_options($stdout, ["--#{argument}", value])
+      cli.options[option_name] == value
     end
+  end
+
+  describe "parse_options" do
+
+    subject { cli }
 
     it { should use_argument(:config, :as => :config_file) }
     it { should use_argument(:executable) }
@@ -35,16 +35,16 @@ describe Darkice::CLI do
 
   context "when pidfile is defined" do
 
-    let(:cli) do 
+    let(:cli) do
       Darkice::CLI.new.tap do |cli|
-        cli.stub :pid_file => "tmp/test-cli.pid" 
+        cli.stub :pid_file => "tmp/test-cli.pid"
       end
     end
 
     after(:each) do
       FileUtils.rm_f(cli.pid_file)
     end
-    
+
     describe "create_pidfile" do
 
       it "should create a pidfile with Process.pid" do
@@ -70,7 +70,7 @@ describe Darkice::CLI do
   context "when pidfile isn't defined" do
 
     describe "create_pidfile" do
-    
+
       it "should not create a pid file " do
         File.should_not_receive(:open)
         cli.create_pidfile
@@ -86,11 +86,11 @@ describe Darkice::CLI do
       end
 
     end
-    
+
   end
 
   describe "process" do
-    
+
     it "should create a Darkice::Process with options" do
       cli.stub :options => { :dummy => true }
       Darkice::Process.should_receive(:new).with(cli.options)
@@ -111,12 +111,12 @@ describe Darkice::CLI do
     let(:arguments) { ["--dummy", "true" ]}
     let(:process) { stub(:loop => true) }
 
-    let(:cli) do 
+    let(:cli) do
       Darkice::CLI.new.tap do |cli|
         cli.stub :parse_options => nil, :init_signals => nil, :create_pidfile => nil, :process => process
       end
     end
-    
+
     it "should parse given arguments" do
       cli.should_receive(:parse_options).with(stdout, arguments)
       cli.execute(stdout, arguments)

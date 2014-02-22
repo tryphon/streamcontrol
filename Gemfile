@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem "rails", "2.3.8"
+gem "rails", "2.3.18"
 gem "rack", "~> 1.1.0"
 
 gem "inherited_resources", "= 1.0.6"
@@ -29,8 +29,7 @@ end
 group :test do
   gem 'rspec', '< 2.0'
   gem 'rspec-rails', '< 2.0'
-  gem 'remarkable_rails'
-  gem 'rcov'
+  gem 'test-unit', '1.2.3'
 
   # require to run spec:plugins
   gem 'taglib-ruby'

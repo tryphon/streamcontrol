@@ -1,11 +1,11 @@
 module LinkToMatcher
   include Spec::Rails::Matchers
- 
+
   def have_link_to(url, html_options = {})
     additionnal_selection = html_options.collect do |key, value|
       "[#{key}=#{value}]"
     end
-    AssertSelect.new(:assert_select, self, "a[href=?]#{additionnal_selection}", url)
+    AssertSelect.new(:assert_select, self, "a[href=?]#{additionnal_selection.join('')}", url)
   end
 end
 

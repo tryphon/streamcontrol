@@ -1,12 +1,12 @@
 # Be sure to restart your server when you modify this file
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.3.8' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.18' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
-if Gem::VERSION >= "1.3.6" 
+if Gem::VERSION >= "1.3.6"
     module Rails
         class GemDependency
             def requirement
@@ -25,9 +25,9 @@ Rails::Initializer.run do |config|
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
 
-  config.load_paths << "#{Rails.root}/app/presenters"
+  config.autoload_paths << "#{Rails.root}/app/presenters"
   Dir["#{Rails.root}/vendor/plugins/*/app/presenters"].each do |directory|
-    config.load_paths << directory
+    config.autoload_paths << directory
   end
 
   config.after_initialize do
@@ -46,10 +46,10 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
 
   config.gem "inherited_resources", :version => "1.0.6"
-  config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
+  config.gem 'will_paginate', :version => '~> 2.3.11'
   config.gem 'delayed_job', :version => "= 2.0.4"
   config.gem 'metalive'
-  
+
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]

@@ -1,4 +1,5 @@
-# -*- coding: undecided -*-
+# encoding: utf-8
+
 class StreamsController < InheritedResources::Base
 
   actions :all
