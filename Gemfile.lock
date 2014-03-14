@@ -151,6 +151,7 @@ GEM
     json (1.8.1)
     libnotify (0.8.2)
       ffi (>= 1.0.11)
+    libv8 (3.16.14.3)
     listen (2.6.1)
       celluloid (>= 0.15.2)
       celluloid-io (>= 0.15.0)
@@ -208,6 +209,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    ref (1.0.5)
     request_store (1.0.5)
     responders (1.0.0)
       railties (>= 3.2, < 5)
@@ -271,6 +273,9 @@ GEM
       activemodel (>= 3.0, < 5.0)
     temple (0.6.7)
     terminal-table (1.4.5)
+    therubyracer (0.12.1)
+      libv8 (~> 3.16.14.0)
+      ref
     thor (0.18.1)
     tilt (1.4.1)
     timers (1.1.0)
@@ -313,6 +318,7 @@ DEPENDENCIES
   simplecov
   simplecov-rcov
   sqlite3
+  therubyracer
   tryphon-box!
   uglifier (>= 1.0.3)
   user_interface!
