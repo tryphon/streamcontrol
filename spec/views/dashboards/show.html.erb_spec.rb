@@ -1,13 +1,14 @@
 require 'spec_helper'
 
-describe "/dashboards/show" do
-  before(:each) do
-    assigns[:events] = @events = Array.new(3) { |n| Event.create! :severity => :info, :message => "dummy" }
-    render 'dashboards/show'
+describe "/dashboards/show.html.erb" do
+
+  let!(:events) do
+    assign :events, EventDecorator.decorate_collection(Array.new(3) { |n| Event.create! :severity => :info, :message => "dummy" }.paginate)
   end
 
   it "should display last events" do
-    response.should have_tag('table[class=events]') do
+    render
+    response.should have_selector('table[class=events]') do
       with_tag("td","Dummy", @events.size)
     end
   end

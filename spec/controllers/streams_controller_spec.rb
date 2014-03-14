@@ -4,20 +4,18 @@ describe StreamsController do
 
   describe "GET 'index'" do
 
-    before(:each) do
-      @streams = Array.new(3) { mock Stream }
-    end
+    let(:streams) { Array.new(3) { double Stream } }
 
     it "should define @streams with Stream.all" do
-      Stream.should_receive(:all).and_return(@streams)
+      Stream.should_receive(:all).and_return(streams)
       get 'index'
-      assigns[:streams].should == @streams
+      assigns[:streams].should == streams
     end
 
   end
 
   describe "PUT 'toggle'" do
-    
+
     let(:stream) { Stream.new }
 
     before(:each) do

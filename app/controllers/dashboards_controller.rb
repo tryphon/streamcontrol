@@ -1,7 +1,7 @@
 class DashboardsController < ApplicationController
 
   def show
-    @events = Event.find(:all, :order => "created_at DESC", :limit => 5)
+    @events = Event.order("created_at DESC").limit(5).decorate
   end
 
 end

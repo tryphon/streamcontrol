@@ -1,4 +1,5 @@
-class Monitoring < ActiveForm::Base
+class Monitoring
+  include BoxControl::Model
 
   attr_accessor :plugin_name
 
@@ -35,15 +36,15 @@ class Monitoring < ActiveForm::Base
     monitoring = Monitoring.new(plugin_name)
     monitoring if monitoring.available?
   end
-  
+
   def self.all
-    [:ping, :if_eth0].collect do |plugin_name| 
+    [:ping, :if_eth0].collect do |plugin_name|
       Monitoring.new(plugin_name)
     end.find_all(&:available?)
   end
 
-  def presenter
-    @presenter ||= MonitoringPresenter.new self
+  def decorate
+    MonitoringDecorator.decorate self
   end
 
   def self.exists?(plugin_name)

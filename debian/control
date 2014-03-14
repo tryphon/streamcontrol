@@ -2,15 +2,15 @@ Source: streamcontrol
 Section: sound
 Priority: optional
 Maintainer: Alban Peignier <alban@tryphon.eu>
-Build-Depends: debhelper, cdbs, rake, rubygems, ruby-dev, libopenssl-ruby, libsqlite3-ruby, git-core
+Build-Depends: debhelper, cdbs, ruby1.9.1 (>= 1.9.3), ruby1.9.1-dev (>= 1.9.3), libopenssl-ruby, libxml2-dev, libxslt1-dev, libsqlite3-dev, git-core
 Standards-Version: 3.8.1
 Homepage: http://projects.tryphon.eu/streamcontrol
 
 Package: streamcontrol
 Architecture: all
-Depends: ruby, libsqlite3-ruby, rake, rubygems, irb
+Depends: ruby1.9.1
 Recommends: libapache2-mod-passenger
-Description: Web interface to manage audio streams created with a 
+Description: Web interface to manage audio streams created with a
  StreamBox system
  .
- See <http://projects.tryphon.eu/streambox/> for more info.
+ See <http://projects.tryphon.eu/projects/streambox/> for more info.

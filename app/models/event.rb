@@ -1,14 +1,16 @@
 class Event < ActiveRecord::Base
 
+  attr_accessible :severity, :message
+
   validates_presence_of :message, :severity
   validates_inclusion_of :severity, :in => [ :error, :info ]
-  # validates_inclusion_of :message, :in => 
-  #   [ 
+  # validates_inclusion_of :message, :in =>
+  #   [
   #     # Errors which avoid darkice from starting
-  #     :invalid_config, :invalid_stream_vorbis, :invalid_stream_mp3, 
-  #     :invalid_stream_aac, :invalid_stream_server, :connection_error, 
+  #     :invalid_config, :invalid_stream_vorbis, :invalid_stream_mp3,
+  #     :invalid_stream_aac, :invalid_stream_server, :connection_error,
   #     # Errors during darkice is running
-  #     :upload_problem, :stream_reconnecting, 
+  #     :upload_problem, :stream_reconnecting,
   #     # Status of Darkice process
   #     :source_started, :source_stopped
   #   ]
@@ -35,10 +37,6 @@ class Event < ActiveRecord::Base
 
   def to_s
     "#{created_at} #{severity} #{message} #{stream_id}".strip
-  end
-
-  def presenter
-    @presenter ||= EventPresenter.new(self)
   end
 
   def stream

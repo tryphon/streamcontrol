@@ -21,15 +21,15 @@ describe Monitoring do
   end
 
   describe ".find_by_plugin_name" do
-    
+
     it "should return a new Monitoring with given plugin_name" do
-      available_monitoring = stub :available? => true
+      available_monitoring = double :available? => true
       Monitoring.should_receive(:new).with(:dummy).and_return(available_monitoring)
       Monitoring.find_by_plugin_name(:dummy).should == available_monitoring
     end
 
     it "should return if the Monitoring isn't available" do
-      Monitoring.stub :new => stub(:available? => false)
+      Monitoring.stub :new => double(:available? => false)
       Monitoring.find_by_plugin_name(:dummy).should be_nil
     end
 
@@ -42,10 +42,10 @@ describe Monitoring do
     end
 
     it "should not include unavailable Monitoring" do
-      Monitoring.stub!(:new).and_return(stub(:available? => false))
+      Monitoring.stub :new => double(:available? => false)
       Monitoring.all.should be_empty
     end
-    
+
   end
 
 end

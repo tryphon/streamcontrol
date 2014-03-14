@@ -1,5 +1,5 @@
 module MonitoringsHelper
-  
+
   def monitoring_preview_tag(plugin_name, html_options = {})
     html_options = { :width => 250 }.update(html_options)
     if Monitoring.exists? plugin_name
@@ -11,7 +11,9 @@ module MonitoringsHelper
     monitoring = Monitoring.find_by_plugin_name(monitoring) if Symbol === monitoring
     return nil unless monitoring
 
-    html_options = { :alt => monitoring.presenter.name }.update(html_options)
+    monitoring = monitoring.decorate
+
+    html_options = { :alt => monitoring.name }.update(html_options)
     image_tag monitoring_path(monitoring, :format => :png), html_options
   end
 

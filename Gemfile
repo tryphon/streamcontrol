@@ -1,49 +1,67 @@
 source 'https://rubygems.org'
 
-gem "rails", "2.3.18"
-gem "rack", "~> 1.1.0"
+gem 'rails', '3.2.17'
 
-gem "inherited_resources", "= 1.0.6"
-gem "will_paginate", "~> 2.3.11"
+# Bundle edge Rails instead:
+# gem 'rails', :git => 'git://github.com/rails/rails.git'
+
+gem 'sqlite3'
+
+gem 'user_interface', :git => 'git://projects.tryphon.priv/user-interface', :branch => 'rails3' #, :path => "~/Projects/UserInterface"
+gem 'boxcontrol', :git => 'git://projects.tryphon.priv/boxcontrol', :branch => 'rails3', :require => 'box_control' #, :path => "~/Projects/BoxControl"
+gem 'tryphon-box', :git => 'git://projects.tryphon.priv/box'
+gem 'inherited_resources'
+gem 'draper', '~> 1.3'
+
+gem 'rails-i18n'
 gem "SyslogLogger", "~> 2.0"
-gem "delayed_job", "= 2.0.4"
 
-# Requires to run spec:plugins
-gem "metalive"
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
 
-gem "tryphon-box", :git => "git://projects.tryphon.priv/box" #, :path => "~/Projects/Box"
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  # gem 'therubyracer', :platforms => :ruby
 
-group :development do
-  gem "sqlite3-ruby"
-  gem "ZenTest"
-  gem "rake-debian-build"
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'guard-bundler'
-  gem 'guard-cucumber'
-  gem 'libnotify' if RUBY_PLATFORM =~ /linux/
-  gem 'capistrano'
-  gem 'capistrano-ext'
+  gem 'uglifier', '>= 1.0.3'
 end
 
-group :test do
-  gem 'rspec', '< 2.0'
-  gem 'rspec-rails', '< 2.0'
-  gem 'test-unit', '1.2.3'
+gem 'jquery-rails'
 
-  # require to run spec:plugins
-  gem 'taglib-ruby'
-end
+# To use ActiveModel has_secure_password
+# gem 'bcrypt-ruby', '~> 3.0.0'
 
-group :cucumber do
-  gem 'capybara'
-  gem 'database_cleaner'
-  gem 'cucumber-rails'
-  gem 'cucumber'
-  gem 'rspec-rails', '< 2.0'
-  gem 'pickle'
-  gem 'factory_girl'
+# To use Jbuilder templates for JSON
+# gem 'jbuilder'
 
-  # used by features/support/mock_icecast2.rb
+# Use unicorn as the app server
+# gem 'unicorn'
+
+# Deploy with Capistrano
+# gem 'capistrano'
+
+# To use debugger
+# gem 'debugger'
+
+group :test, :development do
+  gem "rspec-rails", "~> 2.4"
+  gem "capybara"
+
+  gem "shoulda-matchers"
+
+  gem "guard"
+  gem "guard-rspec"
+  gem "guard-bundler"
+  gem "rb-inotify"
+  gem 'libnotify'
+
+  gem "brakeman", :require => false
+
+  gem 'simplecov'
+  gem 'simplecov-rcov'
+
+  # required to mock icecast
   gem 'eventmachine'
 end

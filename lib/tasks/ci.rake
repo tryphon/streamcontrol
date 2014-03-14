@@ -8,4 +8,4 @@ namespace :ci do
 end
 
 desc "Run continuous integration tasks (spec, ...)"
-task :ci => ["clean", "ci:setup", "db:migrate", "db:test:prepare", "spec", "spec:plugins", "cucumber:ci", "package:binary"]
+task :ci => ["clean", "ci:setup", "db:migrate", "db:test:prepare", "spec", "package:binary"]

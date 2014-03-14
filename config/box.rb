@@ -1,14 +1,15 @@
-# if defined?(Rails)
-#   Box.logger = Rails.logger
-# else
-#   require 'logger'
-#   Box.logger = Logger.new("log/box.log")
+if defined?(Rails)
+  Box.logger = Rails.logger
+else
+  require 'logger'
+  Box.logger = Logger.new("log/box.log")
+end
+
+# unless Box.executable.start_with?("bundle exec")
+#   Box.executable = "bundle exec #{Box.executable}"
 # end
 
-# Use explicitly ruby1.8 (instead of 'env ruby')
-unless Box.executable.start_with?("/usr/bin/ruby1.8")
-  Box.executable = "/usr/bin/ruby1.8 #{Box.executable}"
-end
+# puts Box.executable
 
 Box::Release.latest_url = "http://dev.tryphon.priv/dist/streambox/latest.yml"
 Box::Release.current_url = "public/current.yml"

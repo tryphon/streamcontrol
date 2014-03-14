@@ -2,16 +2,13 @@ require 'spec_helper'
 
 describe Metadata do
 
-  # it { should validate_presence_of :song }
+  it { should validate_presence_of :song }
 
-  def mock_updater
-    mock :update => true
-  end
-
-  let(:streams) { Array.new(3) { mock :metadata_updater => mock_updater } }
+  let(:mock_updater) { double :update => true }
+  let(:streams) { Array.new(3) { double :metadata_updater => mock_updater } }
 
   before(:each) do
-    Stream.stub(:all).and_return(streams)
+    Stream.stub :all => streams
   end
 
   describe "save" do

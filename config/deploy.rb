@@ -11,7 +11,7 @@ server "radio.dbx1.tryphon.priv", :app, :web, :db, :primary => true
 # after "deploy:setup", "db:create"
 
 set :keep_releases, 5
-after "deploy:update", "deploy:cleanup" 
+after "deploy:update", "deploy:cleanup"
 set :use_sudo, false
 
 default_run_options[:pty] = true
@@ -43,7 +43,7 @@ namespace :deploy do
 
   desc "Install gems"
   task :gems, :roles => :app do
-    run "cd #{release_path} && umask 022 && bundle install --path=#{shared_path}/bundle --without=development:test:cucumber"
+    run "cd #{release_path} && umask 022 && bundle install --path=#{shared_path}/bundle --without=development:test"
   end
 
   desc "Fix database file permissions"

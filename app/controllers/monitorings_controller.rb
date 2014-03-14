@@ -5,7 +5,7 @@ class MonitoringsController < InheritedResources::Base
 
   def show
     show! do |format|
-      format.png { send_file @monitoring.image, :type => :png }
+      format.png { send_file resource.image, :type => :png }
     end
   end
 
@@ -14,6 +14,5 @@ class MonitoringsController < InheritedResources::Base
   def collection
     @monitorings ||= Monitoring.all
   end
-
 
 end

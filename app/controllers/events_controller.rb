@@ -5,9 +5,12 @@ class EventsController < InheritedResources::Base
 
   protected
 
+  def resource
+    super.decorate
+  end
+
   def collection
-    puts end_of_association_chain.inspect
-    @events ||= end_of_association_chain.paginate(:page => params[:page], :order => "created_at DESC", :per_page => 15)
+    @events ||= end_of_association_chain.paginate(:page => params[:page], :order => "created_at DESC", :per_page => 15).decorate
   end
 
 end

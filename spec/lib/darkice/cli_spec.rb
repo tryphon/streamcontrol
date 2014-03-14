@@ -13,7 +13,7 @@ describe Darkice::CLI do
 
   end
 
-  Spec::Matchers.define :use_argument do |argument, options = {}|
+  RSpec::Matchers.define :use_argument do |argument, options = {}|
     match do |cli|
       option_name = (options[:as] or argument)
       value = "dummy"
@@ -109,7 +109,7 @@ describe Darkice::CLI do
 
     let(:stdout) { $stdout }
     let(:arguments) { ["--dummy", "true" ]}
-    let(:process) { stub(:loop => true) }
+    let(:process) { double :loop => true }
 
     let(:cli) do
       Darkice::CLI.new.tap do |cli|

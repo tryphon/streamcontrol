@@ -1,4 +1,5 @@
-class Metadata < ActiveForm::Base
+class Metadata
+  include BoxControl::Model
 
   attr_accessor :song
   validates_presence_of :song
@@ -11,10 +12,6 @@ class Metadata < ActiveForm::Base
       stream.metadata_updater.update song
     end
 
-    true
-  end
-  
-  def new_record?
     true
   end
 

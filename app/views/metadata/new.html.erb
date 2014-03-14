@@ -1,6 +1,6 @@
 <%= title_tag t(".title") %>
 
-<% form_for @metadata, :url => metadata_path do |f| %>
+<%= form_for @metadata, :url => metadata_path do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -9,7 +9,7 @@
   </p>
 
   <p>
-    <%= f.submit t(".submit") %> 
-    <%= t("or") %> <%= link_to "#{t(".cancel")} &#8250;", root_path %>
+    <%= f.submit t(".submit") %>
+    <%= t("or") %> <%= link_to t(".cancel"), root_path %>
   </p>
 <% end %>

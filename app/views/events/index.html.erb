@@ -4,13 +4,13 @@
   <% for event in @events %>
 
   <tr>
-    <td><%= event.presenter.severity_image_tag %></td>
-    <td><%= event.presenter.localized_created_at %></td>
-    <td><%= event.presenter.user_message %></td>
-    <td><%= event.presenter.stream_link(self) %></td>
+    <td><%= event.severity_image_tag %></td>
+    <td><%= event.localized_created_at %></td>
+    <td><%= event.user_message %></td>
+    <td><%= event.stream_link %></td>
   </tr>
 
   <% end %>
 </table>
 
-<%= will_paginate %>
+<%= will_paginate @events %>
