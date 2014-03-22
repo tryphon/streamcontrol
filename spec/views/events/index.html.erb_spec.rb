@@ -9,7 +9,7 @@ describe "/events/index.html.erb" do
   it "should display event created_at" do
     events.first.stub :created_at => Time.parse("1 april 2010 10:00:15")
     render
-    response.should have_selector("td", :text => "April 01 2010 10:00:15")
+    response.should have_selector("td", :text => "01 April 2010 10:00:15")
   end
 
   it "should display the image associated to the severity" do
