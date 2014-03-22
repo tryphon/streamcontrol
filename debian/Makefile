@@ -13,7 +13,7 @@ build:
 
 install:
 	cp -a app bin script public vendor config lib db ${DESTDIR}usr/share/streamcontrol
-	cp -a Gemfile Gemfile.lock .bundle ${DESTDIR}usr/share/streamcontrol
+	cp -a Rakefile config.ru Gemfile Gemfile.lock .bundle ${DESTDIR}usr/share/streamcontrol
 	rm -f ${DESTDIR}usr/share/streamcontrol/config/environments/production.rb
 	cp debian/database.yml debian/production.rb debian/apache2.conf ${DESTDIR}etc/streamcontrol/
 	cp debian/darkice-safe ${DESTDIR}usr/bin/
