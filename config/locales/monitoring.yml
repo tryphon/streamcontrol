@@ -1,0 +1,12 @@
+fr:
+  monitorings:
+    if_eth0: Trafic réseau
+    ping: Latence réseau
+    index:
+      title: Supervision
+en:
+  monitorings:
+    if_eth0: Network traffic
+    ping: Network latency
+    index:
+      title: Monitoring

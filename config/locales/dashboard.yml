@@ -1,0 +1,12 @@
+fr:
+  dashboards:
+    show:
+      last_events: Derniers événements
+      monitoring: Supervision
+      see_all_events: Voir tous les événements
+en:
+  dashboards:
+    show:
+      last_events: Last events
+      monitoring: Monitoring
+      see_all_events: See all events

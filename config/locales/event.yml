@@ -1,3 +1,11 @@
+en:
+  events:
+    index:
+      title: Events
+  time:
+    formats:
+      log: "%d %B %Y %H:%M:%S"
+
 fr:
   events:
     index:
@@ -14,3 +22,6 @@ fr:
       source_started: "Source démarrée"
       source_stopped: "Source stoppée"
       audio_problem: "Erreur sur le périphérique audio"
+  time:
+    formats:
+      log: "%B %d %Y %H:%M:%S"

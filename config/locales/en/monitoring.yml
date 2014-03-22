@@ -1,6 +1,0 @@
-en:
-  monitorings:
-    if_eth0: Network traffic
-    ping: Network latency
-    index: 
-      title: Monitoring

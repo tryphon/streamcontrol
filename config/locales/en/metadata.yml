@@ -1,9 +1,0 @@
-en:
-  metadata:
-    new:
-      title: Change streams description
-      submit: Update
-      cancel: cancel
-  activerecord:
-    models:
-      metadata: Description

@@ -1,10 +1,19 @@
+en:
+  metadata:
+    new:
+      title: Change streams description
+      submit: Update
+      cancel: cancel
+  activemodel:
+    models:
+      metadata: Description
 fr:
   metadata:
     new:
       title: Modifier la description des flux
       submit: Modifier
       cancel: revenir
-  activerecord:
+  activemodel:
     attributes:
       metadata:
         song: Titre

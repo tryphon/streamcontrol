@@ -1,6 +1,7 @@
 fr:
   layouts:
     application:
+      information:
         text: |
           Pour plus d'information à propos de <a href="http://www.tryphon.eu/fr/produits/streambox">StreamBox</a>, visitez notre site&nbsp;: <a href="http://www.tryphon.eu/fr">tryphon.eu</a>
 en:

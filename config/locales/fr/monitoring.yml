@@ -1,6 +1,0 @@
-fr:
-  monitorings:
-    if_eth0: Trafic réseau
-    ping: Latence réseau
-    index: 
-      title: Supervision
