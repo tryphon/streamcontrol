@@ -16,10 +16,14 @@ set :use_sudo, false
 
 default_run_options[:pty] = true
 
-set :rake, "bundle exec rake"
+set :bundle_cmd, "/var/lib/gems/1.9.1/bin/bundle"
+set :rake, "#{bundle_cmd} exec rake"
 
-after "deploy:update_code", "deploy:symlink_shared", "deploy:gems"
+after "deploy:update_code", "deploy:symlink_shared", "deploy:bundle_link"
 after "deploy:migrations", "deploy:fix_db_permissions"
+
+require "bundler/capistrano"
+load "deploy/assets"
 
 namespace :deploy do
   # Prevent errors when chmod isn't allowed by server
@@ -41,9 +45,8 @@ namespace :deploy do
     run "touch #{File.join(current_path,'tmp','restart.txt')}"
   end
 
-  desc "Install gems"
-  task :gems, :roles => :app do
-    run "cd #{release_path} && umask 022 && bundle install --path=#{shared_path}/bundle --without=development:test"
+  task :bundle_link do
+    run "ln -fs #{bundle_cmd} #{release_path}/script/bundle"
   end
 
   desc "Fix database file permissions"

@@ -64,4 +64,6 @@ group :test, :development do
 
   # required to mock icecast
   gem 'eventmachine'
+
+  gem 'capistrano'
 end
