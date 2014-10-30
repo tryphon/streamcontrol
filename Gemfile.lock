@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: git://projects.tryphon.priv/boxcontrol
-  revision: 1c5f53f4e9ea0ac9e0e63fbfe9ca6411330ace64
+  revision: ee2632c6f661436cf832c7bc916fc3d52f45937f
   specs:
     boxcontrol (0.0.1)
       draper (~> 1.3)
