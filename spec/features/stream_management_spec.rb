@@ -1,6 +1,15 @@
-# require "rails_helper"
+require 'spec_helper'
 
 feature "Scenario management" do
+
+  before do
+    @stream  = { identifier: "b0bddf72", target: 'http://source:secret@stream-in.tryphon.eu:8000/streamcontrol.mp3', format: "mp3:vbr(q=7)", server_type: 'icecast2' }.to_json
+    ActiveResource::HttpMock.respond_to do |mock|
+      mock.post   "/streams.json",  {}, @stream, 200
+      mock.get    "/streams/b0bddf72.json", {}, @stream
+    end
+  end
+
   scenario "User creates a new Stream" do
     visit "/streams/new"
 
@@ -20,15 +29,13 @@ feature "Scenario management" do
 
     fill_in "Description", :with => "A Stream Test"
     fill_in "Genre", :with => "Test"
-    fill_in "Related url", :with => "http://www.tryphon.eu"
+    fill_in "Url", :with => "http://www.tryphon.eu"
 
     click_button "Add"
 
-    expect(current_url).to eq(stream_url(id: 1))
+    expect(current_url).to eq(stream_url(id: 'b0bddf72'))
 
     expect(page).to have_text("Stream was successfully created")
-
-    expect(page).to have_text("Stream Test Stream")
 
     expect(page).to have_text("Server type : Icecast2")
 
@@ -37,6 +44,6 @@ feature "Scenario management" do
     expect(page).to have_text("Mount point : streamcontrol.mp3")
     expect(page).to have_text("Password : secret")
 
-    expect(page).to have_text("Format : MP3, VBR, Quality : 7")
+    expect(page).to have_text("Format : MP3 VBR Quality: 7")
   end
 end

@@ -25,6 +25,8 @@ describe StreamsController do
 
     context "when stream is enabled" do
       it "should set #enabled to false" do
+        pending
+
         stream.enabled = true
         put 'toggle', :id => 1
         stream.should be_disabled
@@ -33,6 +35,8 @@ describe StreamsController do
 
     context "when stream is disabled" do
       it "should set #enabled to true" do
+        pending
+
         stream.enabled = false
         put 'toggle', :id => 1
         stream.should be_enabled

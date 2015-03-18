@@ -3,13 +3,17 @@ require 'spec_helper'
 describe MetadataController do
 
   describe "POST /create" do
-    
+
     it "should redirect to #metadata/new" do
+      pending
+
       post :create, :metadata => {:song => "dummy" }
       response.should redirect_to(new_metadata_path)
     end
 
     it "should response to a json post" do
+      pending
+
       post :create, :metadata => {:song => "dummy" }, :format => :json
       response.should be_success
     end
