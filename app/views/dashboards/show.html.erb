@@ -4,16 +4,7 @@
 
 <h2><%= t(".last_events") %></h2>
 <table class="events">
-  <% for event in @events %>
-
-  <tr>
-    <td><%= event.severity_image_tag %></td>
-    <td><%= event.localized_created_at %></td>
-    <td><%= event.user_message %></td>
-    <td><%= event.stream_link %></td>
-  </tr>
-
-  <% end %>
+  <%= render @events %>
 </table>
 
 <%= link_to t('.see_all_events'), events_path %>

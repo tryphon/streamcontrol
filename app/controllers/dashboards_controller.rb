@@ -1,7 +1,7 @@
 class DashboardsController < ApplicationController
 
   def show
-    @events = Event.order("created_at DESC").limit(5).decorate
+    @events = EventDecorator.decorate_collection(Event.latest)
   end
 
 end

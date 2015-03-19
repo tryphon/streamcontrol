@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "/dashboards/show.html.erb" do
 
   let!(:events) do
-    assign :events, EventDecorator.decorate_collection(Array.new(3) { |n| Event.create! :severity => :info, :message => "dummy" }.paginate)
+    assign :events, EventDecorator.decorate_collection(Array.new(3) { |n| Event.new timestamp: Time.now, message: "dummy" }.paginate)
   end
 
   it "should display last events" do

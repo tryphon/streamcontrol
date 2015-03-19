@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: git://projects.tryphon.priv/boxcontrol
-  revision: 20961d0bb735f6a8fa1abbea9d9f4f7053603ff4
+  revision: 26003a47c96c33d07808f31e0f69ca76161ef952
   branch: gobroadcast
   specs:
     boxcontrol (0.0.1)

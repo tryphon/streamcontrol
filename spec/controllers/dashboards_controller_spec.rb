@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe DashboardsController do
+
+  before do
+    Event.stub latest: []
+  end
+
   describe "GET 'show'" do
     it "should be successful" do
       get 'show'
