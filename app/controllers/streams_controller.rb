@@ -6,7 +6,7 @@ class StreamsController < InheritedResources::Base
   respond_to :html, :xml, :json
 
   def show
-    @events = EventDecorator.decorate_collection(resource.events)
+    @events = EventDecorator.decorate_collection(resource.events.first(15))
     show!
   end
 
