@@ -9,7 +9,7 @@ gem 'sqlite3'
 
 gem 'user_interface', :git => 'git://projects.tryphon.priv/user-interface'#, :path => "~/Projects/UserInterface"
 gem 'boxcontrol', git: 'git://projects.tryphon.priv/boxcontrol', require: 'box_control', branch: 'gobroadcast'#, :path => "~/Projects/BoxControl"
-gem 'tryphon-box', :git => 'git://projects.tryphon.priv/box'
+gem 'tryphon-box', :git => 'git://projects.tryphon.priv/box'#, :path => "~/Projects/Box"
 gem 'inherited_resources'
 gem 'draper', '~> 1.3'
 

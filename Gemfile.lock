@@ -1,6 +1,6 @@
 GIT
   remote: git://projects.tryphon.priv/box
-  revision: b8266a467d6aefbab10e45dbd46db89f71d24dc7
+  revision: 029f5ef655fcf9b6a983c9a76ef9726f311f5790
   specs:
     tryphon-box (1.02)
       activesupport (~> 3.2.17)
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: git://projects.tryphon.priv/boxcontrol
-  revision: 26003a47c96c33d07808f31e0f69ca76161ef952
+  revision: 6a44a270bafc57666d2254ac643be85392650fb6
   branch: gobroadcast
   specs:
     boxcontrol (0.0.1)
