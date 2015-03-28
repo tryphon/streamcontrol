@@ -8,7 +8,7 @@ class Metadata
     return false unless valid?
     logger.info "New metadata: '#{song}'"
 
-    Stream.all.each do |stream|
+    Stream.enabled.each do |stream|
       stream.metadata_updater.update song
     end
 
