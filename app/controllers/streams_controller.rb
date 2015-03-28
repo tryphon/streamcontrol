@@ -11,8 +11,7 @@ class StreamsController < InheritedResources::Base
   end
 
   def toggle
-    resource.toggle :enabled
-    resource.save
+    resource.toggle
     redirect_to :back
   end
 
