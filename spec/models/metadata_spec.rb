@@ -8,7 +8,7 @@ describe Metadata do
   let(:streams) { Array.new(3) { double :metadata_updater => mock_updater } }
 
   before(:each) do
-    Stream.stub :all => streams
+    Stream.stub :enabled => streams
   end
 
   describe "save" do
