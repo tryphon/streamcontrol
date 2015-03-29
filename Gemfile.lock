@@ -1,8 +1,8 @@
 GIT
   remote: git://projects.tryphon.priv/box
-  revision: 029f5ef655fcf9b6a983c9a76ef9726f311f5790
+  revision: 9be2482182ee2aae3b0a74f9ebccec0a7c9a7572
   specs:
-    tryphon-box (1.02)
+    tryphon-box (1.03)
       activesupport (~> 3.2.17)
       facter (~> 1.7.5)
       httparty
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: git://projects.tryphon.priv/boxcontrol
-  revision: 01ed3c886834f7f4f085b7e23f687f7db2315194
+  revision: c93f4b910625e498cc8c4da3e1e537417d2532d9
   branch: gobroadcast
   specs:
     boxcontrol (0.0.1)
