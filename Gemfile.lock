@@ -1,18 +1,18 @@
 GIT
   remote: git://projects.tryphon.priv/box
-  revision: bdd3bdf5d2bc3fe4a36872430f535ad0d6e96d58
+  revision: f2ab088ff011c4da145eaae25798cb01df1ec6a6
   specs:
-    tryphon-box (1.04)
+    tryphon-box (1.06)
       activesupport (~> 3.2.17)
       facter (~> 1.7.5)
       httparty
       steto
-      treetop
+      treetop (< 1.6)
       trollop
 
 GIT
   remote: git://projects.tryphon.priv/boxcontrol
-  revision: fc6b3b0fd4afd0870d60dc0bbde82a32add0ea7c
+  revision: 3db5b7767bb2d8e2e7f22845005034c5846e3d34
   specs:
     boxcontrol (0.0.1)
       activeresource
