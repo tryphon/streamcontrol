@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: git://projects.tryphon.priv/boxcontrol
-  revision: 247bc649e589a191b8cc5d005f977e549f8d9a90
+  revision: 3e17e4672e4f9b8a60a0e8f70a3c1161c40db913
   specs:
     boxcontrol (0.0.1)
       activeresource
